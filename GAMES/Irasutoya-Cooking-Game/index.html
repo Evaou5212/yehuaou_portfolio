@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yehua Ou</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../../styles.css">
+  <style>
+    #page-scroll-wrap {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: auto;
+      overscroll-behavior-y: contain;
+    }
+    #page-scroll-wrap::-webkit-scrollbar { display: block; width: 10px; }
+    #page-scroll-wrap::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); }
+    #page-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.2); border-radius: 5px; }
+    #page-scroll-wrap::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.35); }
+    @supports (scrollbar-width: thin) {
+      #page-scroll-wrap { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.04); }
+    }
+    body.project-page { overflow-x: visible !important; }
+    .project-page { font-family: var(--font-body); }
+    .project-page h1, .project-page h2, .project-page h3, .project-page h4 { font-family: var(--font-display); }
+    .project-page .hero-inner {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 64rem;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes hero-enter {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .project-page .hero-title {
+      white-space: nowrap;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 2.75rem 0 !important;
+      padding: 0 !important;
+      opacity: 0;
+      animation: hero-enter 0.9s ease-out forwards;
+      font-size: clamp(2.5rem, 6vw + 2rem, 11rem);
+    }
+    .project-page .hero-subtitle {
+      text-align: center;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0;
+      animation: hero-enter 0.7s ease-out 0.25s forwards;
+    }
+    .project-intro-prose, .project-intro-prose p { font-size: 1.25rem; line-height: 1.7; }
+  </style>
+</head>
+<body class="project-page min-h-screen bg-white text-gray-900">
+  <div id="page-scroll-wrap">
+  <nav class="nav-main nav-main-subpage">
+    <div class="nav-main-left">
+      <a href="../../../games.html" class="nav-link-main">Games</a>
+      <a href="../../../uiux.html" class="nav-link-main">UI/UX</a>
+      <a href="../../../digital-art.html" class="nav-link-main">Digital Art</a>
+    </div>
+    <div class="nav-main-center">
+      <a href="../../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+    </div>
+    <div class="nav-main-right">
+      <a href="../../../about.html" class="nav-link-main">About</a>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden" style="height: 70vh;">
+    <div class="absolute inset-0 z-0">
+      <img src="cover.png" alt="Irasutoya Cooking Game" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-white/60"></div>
+    </div>
+    <div class="hero-inner relative z-10 text-gray-900">
+      <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tight">
+        Irasutoya Cooking Game
+      </h1>
+      <p class="hero-subtitle text-xl md:text-2xl font-light text-gray-900 leading-relaxed" style="opacity: 0.9;">
+        A browser game made with irasutoya-style illustrations.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-24 space-y-20">
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-10">
+      <div class="md:col-span-4 space-y-8 sticky top-32">
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Project Type</h3>
+          <p class="text-xl font-medium">Browser Game</p>
+        </div>
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Tools</h3>
+          <p class="text-xl font-medium">Unity, GPT-4</p>
+        </div>
+      </div>
+      <div class="md:col-span-8 space-y-6">
+        <h2 class="text-2xl font-medium text-gray-900">About</h2>
+        <div class="prose prose-lg text-gray-600 font-light leading-relaxed project-intro-prose">
+          <p>
+            This project was inspired by my appreciation for the charming visual style of Irasutoya. After discovering its distinctive and cute illustration aesthetic, I used ChatGPT to generate game assets that emulate this style, and then built a browser-based mini game in Unity based on those materials. The process involved exploring visual direction, generating and organizing assets with AI, and implementing gameplay mechanics before deploying the final project to the web. It represents an experimental integration of generative AI tools with practical game development.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-6">
+      <h2 class="text-3xl font-medium text-gray-900">Visual Style Reference</h2>
+      <p class="text-gray-600 leading-relaxed text-center project-intro-prose" style="font-size: 1.25rem;">
+        The visual style is inspired by <a href="https://www.irasutoya.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-900">Irasutoya</a> (いらすとや), a Japanese free illustration collection known for its cute and distinctive aesthetic.
+      </p>
+      <div class="flex justify-center">
+        <img src="yuenchi_family.png" alt="Irasutoya-style illustration reference" class="max-w-full w-auto max-h-[70vh] object-contain" />
+      </div>
+    </section>
+
+    <section class="space-y-6">
+      <h2 class="text-3xl font-medium text-gray-900">Play the Game</h2>
+      <div class="flex flex-col items-center">
+        <iframe
+          height="167"
+          frameborder="0"
+          src="https://itch.io/embed/3471726"
+          width="552"
+          class="max-w-full"
+          title="Irasutoya Cooking Game"
+        ><a href="https://evaou5212.itch.io/irasutoya-cooking-game">Irasutoya Cooking Game by Evaou5212</a></iframe>
+        <p class="text-gray-500 text-sm mt-4">
+          <a href="https://evaou5212.itch.io/irasutoya-cooking-game" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-700">Open on itch.io</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-gray-200 py-16 text-center text-gray-400 text-sm">
+    <p>&copy; 2026 Yehua Ou.</p>
+  </footer>
+  </div>
+</body>
+</html>

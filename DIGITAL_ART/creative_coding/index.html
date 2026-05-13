@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yehua Ou</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    #page-scroll-wrap {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: auto;
+      overscroll-behavior-y: contain;
+    }
+    #page-scroll-wrap::-webkit-scrollbar { display: block; width: 10px; }
+    #page-scroll-wrap::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); }
+    #page-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.2); border-radius: 5px; }
+    @supports (scrollbar-width: thin) {
+      #page-scroll-wrap { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.04); }
+    }
+    body.project-page { overflow-x: visible !important; }
+    .project-page { font-family: var(--font-body); }
+    .project-page h1, .project-page h2, .project-page h3, .project-page h4 { font-family: var(--font-display); }
+    .p5-frame { width: 100%; display: flex; justify-content: center; }
+    .p5-wrap { display: inline-flex; justify-content: center; align-items: center; }
+    .p5-embed { border: 0; outline: none; box-shadow: none; background: transparent; display: block; }
+  </style>
+</head>
+<body class="project-page min-h-screen bg-white text-gray-900">
+  <div id="page-scroll-wrap">
+  <nav class="nav-main nav-main-subpage">
+    <div class="nav-main-left">
+      <a href="../../games.html" class="nav-link-main">Games</a>
+      <a href="../../uiux.html" class="nav-link-main">UI/UX</a>
+      <a href="../../digital-art.html" class="nav-link-main">Digital Art</a>
+    </div>
+    <div class="nav-main-center">
+      <a href="../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+    </div>
+    <div class="nav-main-right">
+      <a href="../../about.html" class="nav-link-main">About</a>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-6 pt-64 pb-24 space-y-20">
+    <header class="space-y-2 text-center pb-16">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold text-gray-900 tracking-tight">
+        Creative Coding
+      </h1>
+      <p class="text-xl text-gray-600 font-light">
+        p5.js sketches embedded for direct interaction.
+      </p>
+    </header>
+
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-10">
+      <div class="md:col-span-4 space-y-8 sticky top-32">
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Project Type</h3>
+          <p class="text-xl font-medium">Creative Coding / Interactive</p>
+        </div>
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Tools</h3>
+          <p class="text-xl font-medium">p5.js</p>
+        </div>
+      </div>
+      <div class="md:col-span-8 space-y-6">
+        <h2 class="text-2xl font-medium text-gray-900">Works</h2>
+        <div class="prose prose-lg text-gray-600 font-light leading-relaxed" style="font-size: 1.25rem; line-height: 1.7;">
+          <p>
+            A collection of interactive p5.js experiments. Each sketch is embedded directly on the page and stacked vertically.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-12">
+      <div class="p5-frame">
+        <div class="p5-wrap">
+          <iframe class="p5-embed p5-auto" frameborder="0" scrolling="no" title="face generator" src="Tear_drops/index.html"></iframe>
+        </div>
+      </div>
+      <div class="p5-frame">
+        <div class="p5-wrap">
+          <iframe class="p5-embed p5-auto" frameborder="0" scrolling="no" title="Optical Illusion" src="Optical%20Illusion/index.html"></iframe>
+        </div>
+      </div>
+      <div class="p5-frame">
+        <div class="p5-wrap">
+          <iframe class="p5-embed p5-auto" frameborder="0" scrolling="no" title="Optical Illusion 2" src="Optical%20Illusion2/index.html"></iframe>
+        </div>
+      </div>
+      <div class="p5-frame">
+        <div class="p5-wrap">
+          <iframe class="p5-embed p5-auto" frameborder="0" scrolling="no" title="Experimental Clock" src="Experimental_Clock/index.html"></iframe>
+        </div>
+      </div>
+      <div class="p5-frame">
+        <div class="p5-wrap">
+          <iframe class="p5-embed p5-auto" frameborder="0" scrolling="no" title="Exquisite Corpse" src="Exquisite_Corpse/index.html"></iframe>
+        </div>
+      </div>
+      <div class="p5-frame">
+        <div class="p5-wrap">
+          <iframe class="p5-embed p5-auto" frameborder="0" scrolling="no" title="Tear drops" src="face_generator/index.html"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      function sizeIframeToCanvas(iframe) {
+        if (!iframe || !iframe.contentWindow) return;
+
+        var attempts = 0;
+        function tick() {
+          attempts++;
+          try {
+            var doc = iframe.contentWindow.document;
+            var canvas = doc && doc.querySelector && doc.querySelector('canvas');
+            if (canvas) {
+              var rect = canvas.getBoundingClientRect();
+              var w = Math.ceil(rect.width || canvas.width || 0);
+              var h = Math.ceil(rect.height || canvas.height || 0);
+              if (w > 0 && h > 0) {
+                iframe.style.width = w + 'px';
+                iframe.style.height = h + 'px';
+                return;
+              }
+            }
+          } catch (e) {
+            // ignore
+          }
+          if (attempts < 240) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      document.querySelectorAll('iframe.p5-auto').forEach(function (iframe) {
+        iframe.addEventListener('load', function () { sizeIframeToCanvas(iframe); });
+        if (iframe.complete) sizeIframeToCanvas(iframe);
+      });
+    })();
+  </script>
+
+  <footer class="border-t border-gray-200 py-16 text-center text-gray-400 text-sm">
+    <p>&copy; 2026 Yehua Ou.</p>
+  </footer>
+  </div>
+</body>
+</html>

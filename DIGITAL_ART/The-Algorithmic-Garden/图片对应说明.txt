@@ -1,0 +1,23 @@
+当前页面引用的文件名（路径均为 /DIGITAL_ART/The-Algorithmic-Garden/，空格在 URL 中为 %20）：
+
+【封面 / 首页与 Digital Art 卡片】
+cover.png
+
+【项目介绍页】
+panopticon theory.jpg     — Theoretical Framework：The Panopticon Effect
+universe 25.jpg           — Theoretical Framework：The "Universe 25" Warning（若你的是 universe-25.jpg 请重命名或告诉我）
+Panopticon Living Space.png — Visual Metaphors：The Panopticon Living Space（PNG 已设自然显示）
+watchtower.jpg            — The Watchtower
+mirror and cages.jpg      — The Mirror & The Cages
+puppets.jpg               — The Puppets
+surveillance monitor.jpg  — Surveillance Monitor and Puppet
+puppets in cages.jpg      — Puppets trapped in Cages
+nature as disguise.jpg    — Environment Design：Nature as Disguise
+final form 1.jpg          — Final Form 横图
+final form 2.jpg          — Final Form 左图
+final form 3.jpg          — Final Form 右图
+
+【视频】
+utopia_final.mp4
+
+若某张图是 PNG 且非方形/带透明，在对应 <img> 上已加 class="natural" 会完整显示不裁切；若还有其它 PNG 需要同样效果，可给该 img 加上 class="natural"。

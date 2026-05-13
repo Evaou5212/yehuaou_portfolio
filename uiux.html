@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yehua Ou</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="subpage">
+    <nav class="nav-main nav-main-subpage">
+        <div class="nav-main-left">
+            <a href="games.html" class="nav-link-main">Games</a>
+            <span class="nav-link-main nav-link-current">UI/UX</span>
+            <a href="digital-art.html" class="nav-link-main">Digital Art</a>
+        </div>
+        <div class="nav-main-center">
+            <a href="index.html#main" class="nav-main-name-link">Yehua Ou</a>
+        </div>
+        <div class="nav-main-right">
+            <a href="about.html" class="nav-link-main">About</a>
+        </div>
+    </nav>
+
+    <section class="subpage-title-banner subpage-title-banner-with-gallery" aria-hidden="false">
+        <h1 class="subpage-headline subpage-headline-twoline">USER<br>EXPERIENCE</h1>
+    </section>
+
+    <main>
+        <div class="projects-gallery" id="projectsGallery" aria-label="Projects">
+            <div id="galleryRoot" data-columns="2" data-category="UI/UX"></div>
+        </div>
+        <div class="above-footer">
+            <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">Back to top</button>
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="copyright">© 2026 Yehua Ou.</span>
+                <p class="footer-email"><a href="mailto:imeva5212@gmail.com">imeva5212@gmail.com</a></p>
+            </div>
+        </footer>
+    </main>
+    <script type="module" src="src/main.jsx"></script>
+    <script>
+      document.getElementById('backToTop')?.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
+</body>
+</html>

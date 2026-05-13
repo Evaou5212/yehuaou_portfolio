@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yehua Ou</title>
+    <!-- 样式与字体（本地字体：Climate_Crisis、Google_Sans_Flex、Cantata_One） -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="no-scroll">
+    <!-- Intro Scene (First Page - 球体通道) -->
+    <section class="intro-scene" id="introScene">
+        <!-- 背景层：ShaderGradient waterPlane 完全复刻（React + Three.js） -->
+        <div class="bg-layer" id="bgLayer"></div>
+        <!-- 3D Container：仅文案做 3D -->
+        <div class="scene-3d" id="scene3d">
+            <!-- Content Layer (text on both sides) -->
+            <div class="content-layer" id="contentLayer">
+                <h1 class="intro-headline">IN BETWEEN</h1>
+                <div class="intro-bottom-row">
+                    <div class="intro-text-left">
+                        <p class="intro-cta">Let's create cool stuff together!</p>
+                        <div class="intro-divider"></div>
+                        <p class="intro-tagline">I use design and technology to explore<br>ways of seeing, learning, and engaging.</p>
+                    </div>
+                    <div class="intro-text-right">
+                        <p class="intro-make-things">Make things</p>
+                    <p class="intro-sub-text">
+                        <span class="rotating-text-wrap" aria-live="polite">
+                            <span class="rotating-text-words">
+                                <span class="rotating-word current" data-index="0">Playful</span>
+                                <span class="rotating-word" data-index="1">Exploratory</span>
+                                <span class="rotating-word" data-index="2">Intentional</span>
+                            </span>
+                        </span>
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portal 层：移出 3D 场景，纯 2D 缩放避免穿模；球体放大至满屏后光晕渐隐进第二页 -->
+        <div class="portal-layer" id="portalLayer">
+            <div class="portal-container">
+                <div class="sun-portal" id="sunPortal" aria-hidden="true">
+                    <div class="sun-portal-layer sun-portal-atmosphere"></div>
+                    <div class="sun-portal-layer sun-portal-ring"></div>
+                    <div class="sun-portal-layer sun-portal-body"></div>
+                    <div class="sun-portal-layer sun-portal-core"></div>
+                    <div class="sun-portal-layer sun-portal-hotspot"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation (on top) -->
+        <nav class="nav-intro">
+            <div class="nav-left">
+                <a href="games.html" class="nav-link-intro">Games</a>
+                <a href="uiux.html" class="nav-link-intro">UI/UX</a>
+                <a href="digital-art.html" class="nav-link-intro">Digital Art</a>
+            </div>
+            <div class="nav-right">
+                <a href="about.html" class="nav-link-intro">About</a>
+            </div>
+        </nav>
+        
+        <!-- Scroll Down -->
+        <div class="scroll-down-intro">
+            <span class="scroll-text">SCROLL DOWN</span>
+            <div class="scroll-arrows">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="scroll-progress" id="scrollProgress">
+            <div class="progress-bar"></div>
+        </div>
+    </section>
+
+    <!-- Main Content (Second Page) -->
+    <main class="main-content" id="mainContent">
+        <!-- Nav on second page (Yehua Ou in center, click to return) -->
+        <nav class="nav-main" id="navMain">
+            <div class="nav-main-left">
+                <a href="games.html" class="nav-link-main">Games</a>
+                <a href="uiux.html" class="nav-link-main">UI/UX</a>
+                <a href="digital-art.html" class="nav-link-main">Digital Art</a>
+            </div>
+            <div class="nav-main-center" id="backToHome" role="button" tabindex="0" aria-label="Back to home"><span class="nav-main-name">Yehua Ou</span></div>
+            <div class="nav-main-right">
+                <a href="about.html" class="nav-link-main">About</a>
+            </div>
+        </nav>
+        <!-- Cover Section：草地固定，滚动先驱动文字出现并上移到居中，再整体下滑 -->
+        <section class="cover-section" id="coverSection">
+            <div class="cover-bg"></div>
+            <div class="cover-motion-wrap" id="coverMotionWrap">
+                <div class="cover-motion-text" id="coverMotionText" aria-hidden="true">
+                    <span class="motion-line" data-line="0">
+                        <span class="motion-word" data-i="0">I</span> <span class="motion-word" data-i="1">see</span> <span class="motion-word" data-i="2">curiosity</span> <span class="motion-word" data-i="3">and</span> <span class="motion-word" data-i="4">empathy</span> <span class="motion-word" data-i="5">as</span>
+                    </span>
+                    <span class="motion-line" data-line="1">
+                        <span class="motion-word" data-i="0">the</span> <span class="motion-word" data-i="1">essential</span> <span class="motion-word" data-i="2">sensibilities</span> <span class="motion-word" data-i="3">to</span> <span class="motion-word" data-i="4">uncover</span>
+                    </span>
+                    <span class="motion-line" data-line="2">
+                        <span class="motion-word" data-i="0">overlooked</span> <span class="motion-word" data-i="1">problems</span> <span class="motion-word" data-i="2">and</span> <span class="motion-word" data-i="3">shape</span> <span class="motion-word" data-i="4">meaningful</span> <span class="motion-word" data-i="5">solutions.</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <p class="about-text">
+                    Yehua Ou is a creative technologist and product designer working across interaction design, learning systems, and digital experiences.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projects Parallax Gallery -->
+        <div class="projects-gallery" id="projectsGallery" aria-label="Projects">
+            <div id="galleryRoot" data-columns="3"></div>
+        </div>
+
+        <!-- 最后一张图下方留白 + 返回顶部 -->
+        <div class="above-footer">
+            <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">Back to top</button>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="copyright">© 2026 Yehua Ou.</span>
+                <p class="footer-email"><a href="mailto:imeva5212@gmail.com">imeva5212@gmail.com</a></p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- 过渡遮罩：在 body 顶层，覆盖 intro 和 main，实现第一页淡出→第二页淡入 -->
+    <div class="transition-light-overlay" id="transitionLightOverlay" aria-hidden="true"></div>
+
+    <!-- 顺序：Shader 背景(React) -> 草坪背景(第二页) -> 滚动与转场 -->
+    <script type="module" src="src/main.jsx"></script>
+    <script src="js/grass-bg.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

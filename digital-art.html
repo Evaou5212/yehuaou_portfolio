@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yehua Ou</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="subpage">
+    <nav class="nav-main nav-main-subpage">
+        <div class="nav-main-left">
+            <a href="games.html" class="nav-link-main">Games</a>
+            <a href="uiux.html" class="nav-link-main">UI/UX</a>
+            <span class="nav-link-main nav-link-current">Digital Art</span>
+        </div>
+        <div class="nav-main-center">
+            <a href="index.html#main" class="nav-main-name-link">Yehua Ou</a>
+        </div>
+        <div class="nav-main-right">
+            <a href="about.html" class="nav-link-main">About</a>
+        </div>
+    </nav>
+
+    <section class="subpage-title-banner subpage-title-banner-with-gallery" aria-hidden="false">
+        <h1 class="subpage-headline">DIGITAL ART</h1>
+    </section>
+
+    <main class="digital-art-content">
+        <section class="subpage-list digital-art-grid" id="subpageProjects">
+            <div class="digital-art-row" aria-hidden="false">
+                <article class="digital-art-item">
+                    <a href="/DIGITAL_ART/The-Algorithmic-Garden/index.html" class="digital-art-item-link">
+                        <div class="digital-art-preview">
+                            <img src="/DIGITAL_ART/The-Algorithmic-Garden/cover.png" alt="The Algorithmic Garden" />
+                        </div>
+                        <h3 class="digital-art-title">The Algorithmic Garden</h3>
+                        <p class="digital-art-desc">Speculative 3D Animation — A speculative animation exploring the hidden costs of a perfect society.</p>
+                    </a>
+                </article>
+                <article class="digital-art-item">
+                    <a href="/DIGITAL_ART/TD_practices/lorde/index.html" class="digital-art-item-link">
+                        <div class="digital-art-preview">
+                            <img src="/DIGITAL_ART/TD_practices/lorde/lorde1.gif" alt="Lorde — Visual Re-creation" />
+                        </div>
+                        <h3 class="digital-art-title">Lorde — Visual Re-creation</h3>
+                        <p class="digital-art-desc">TouchDesigner — Visual re-creations inspired by Lorde’s album and cover art.</p>
+                    </a>
+                </article>
+                <article class="digital-art-item">
+                    <a href="/DIGITAL_ART/TD_practices/experimental_camera/index.html" class="digital-art-item-link">
+                        <div class="digital-art-preview">
+                            <img src="/DIGITAL_ART/TD_practices/experimental_camera/cover.gif" alt="Experimental Camera — cover" />
+                        </div>
+                        <h3 class="digital-art-title">Experimental Camera</h3>
+                        <p class="digital-art-desc">TouchDesigner, MediaPipe — Hand tracking interaction project.</p>
+                    </a>
+                </article>
+            </div>
+            <div class="digital-art-row" aria-hidden="false">
+                <article class="digital-art-item">
+                    <a href="/DIGITAL_ART/TD_practices/hikaru_utada/index.html" class="digital-art-item-link">
+                        <div class="digital-art-preview">
+                            <img src="/DIGITAL_ART/TD_practices/hikaru_utada/cover.gif" alt="VJ Controller — cover" />
+                        </div>
+                        <h3 class="digital-art-title">VJ Controller</h3>
+                        <p class="digital-art-desc">TouchDesigner — Audio visualization with Hikaru Utada’s music and a customizable control panel.</p>
+                    </a>
+                </article>
+                <article class="digital-art-item">
+                    <a href="/DIGITAL_ART/creative_coding/index.html" class="digital-art-item-link">
+                        <div class="digital-art-preview">
+                            <img src="/DIGITAL_ART/creative_coding/cover.png" alt="Creative Coding — cover" />
+                        </div>
+                        <h3 class="digital-art-title">Creative Coding</h3>
+                        <p class="digital-art-desc">p5.js — A collection of interactive sketches embedded on the page.</p>
+                    </a>
+                </article>
+            </div>
+        </section>
+        <div class="above-footer">
+            <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">Back to top</button>
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="copyright">© 2026 Yehua Ou.</span>
+                <p class="footer-email"><a href="mailto:imeva5212@gmail.com">imeva5212@gmail.com</a></p>
+            </div>
+        </footer>
+    </main>
+    <script>
+      document.getElementById('backToTop')?.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    </script>
+    <script>
+      (function () {
+        var rows = document.querySelectorAll('.digital-art-row');
+        if (!rows.length) return;
+        var lastScrollY = window.scrollY;
+        var scrollingDown = true;
+        window.addEventListener('scroll', function () {
+          var y = window.scrollY;
+          scrollingDown = y > lastScrollY;
+          lastScrollY = y;
+        }, { passive: true });
+        var observer = new IntersectionObserver(
+          function (entries) {
+            var scrollY = window.scrollY;
+            var isScrollingDown = scrollingDown || scrollY > lastScrollY;
+            entries.forEach(function (entry) {
+              var el = entry.target;
+              if (entry.isIntersecting) {
+                if (isScrollingDown) el.classList.add('in-view');
+              } else if (!isScrollingDown) {
+                el.classList.add('digital-art-row-instant');
+                el.classList.remove('in-view');
+                setTimeout(function () {
+                  el.classList.remove('digital-art-row-instant');
+                }, 80);
+              }
+            });
+          },
+          { rootMargin: '-60px 0px -80px 0px', threshold: 0.01 }
+        );
+        rows.forEach(function (row) { observer.observe(row); });
+      })();
+    </script>
+</body>
+</html>

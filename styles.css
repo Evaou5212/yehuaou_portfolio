@@ -1,0 +1,1522 @@
+/* ===== Fonts ===== */
+@font-face {
+    font-family: 'Climate Crisis';
+    src: url('./texts/Climate_Crisis/ClimateCrisis-Regular-VariableFont_YEAR.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Google Sans Flex';
+    src: url('./texts/Google_Sans_Flex/static/GoogleSansFlex_24pt-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Google Sans Flex';
+    src: url('./texts/Google_Sans_Flex/static/GoogleSansFlex_24pt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Google Sans Flex';
+    src: url('./texts/Google_Sans_Flex/static/GoogleSansFlex_24pt-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Google Sans Flex';
+    src: url('./texts/Google_Sans_Flex/static/GoogleSansFlex_24pt-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cantata One';
+    src: url('./texts/Cantata_One/CantataOne-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./texts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./texts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ===== CSS Reset & Variables ===== */
+:root {
+    --color-bg: #000000;
+    --color-bg-second: #ffffff;
+    --color-text: #ffffff;
+    --color-text-secondary: #888888;
+    --color-oval: #d4d4d4;
+    /* Montserrat: 首页 IN BETWEEN、Let's create...、I design...、Make things、旋转词 */
+    --font-display: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Google Sans Flex: 导航按钮、第二页介绍等所有其他文字 */
+    --font-body: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ===== Intro Scene ===== */
+.intro-scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    background: var(--color-bg);
+    overflow: hidden;
+}
+
+.intro-scene.completed {
+    display: none !important;
+}
+
+/* 3D Scene Container（仅文案层，背景已移出） */
+.scene-3d {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+}
+
+/* Background Layer：ShaderGradient waterPlane（src/ShaderBackground.jsx） */
+.bg-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: #050208;
+}
+
+.shader-gradient-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+/* Content Layer - IN BETWEEN 居中全宽，底部 tagline 与 Make things 两侧 */
+.content-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10vh 6vw 10vh 6vw;
+    pointer-events: none;
+}
+
+.intro-headline {
+    font-family: var(--font-display);
+    font-size: 12vw;
+    font-weight: 700;
+    line-height: 90%;
+    margin: 0;
+    color: var(--color-text);
+    text-align: center;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    transform: translateX(-0.08em); /* 左移补偿 letter-spacing 造成的视觉偏右 */
+}
+
+.intro-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 2rem;
+    z-index: 5;
+    margin-bottom: 4vh;
+    min-width: 0;
+}
+
+.intro-text-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 52em;
+    transform: translateY(-4.2vh);
+    min-width: 0;
+}
+
+.intro-cta {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+.intro-divider {
+    width: 2.5em;
+    height: 2px;
+    background-color: color-mix(in srgb, var(--color-text) 60%, transparent);
+}
+
+.intro-text-right {
+    justify-self: end;
+    text-align: right;
+    z-index: 5;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.intro-make-things {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4.5vw, 4rem);
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    line-height: 1.05;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+.intro-sub-text {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 9vw, 8rem);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.05;
+    color: var(--color-text);
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.intro-tagline {
+    margin: 0;
+    padding-bottom: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3.2vw, 1.95rem);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+/* Rotating text（参考 https://www.reactbits.dev/text-animations/rotating-text） */
+.rotating-text-wrap {
+    display: inline-block;
+}
+
+.rotating-text-words {
+    display: inline-block;
+    position: relative;
+    height: 1.35em;
+    min-width: 9em;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.rotating-word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    width: 100%;
+    text-transform: capitalize;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+.rotating-word.current {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.rotating-word.leave-up {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.rotating-word.enter-from-below {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+/* Portal 层：在 intro-scene 内、scene-3d 外，纯 2D 缩放无透视，避免穿模 */
+.portal-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    will-change: transform;
+}
+
+/* 球体直径 = 页面高度的 105%（约为原 70% 的 1.5 倍） */
+.portal-container {
+    position: relative;
+    width: 105vh;
+    height: 105vh;
+}
+
+/* 第二页草坪动态背景 (js/grass-bg.js 注入到 .cover-bg)，第二页不可见时自动暂停绘制 */
+.grass-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: auto;
+}
+
+/* ===== Sun Portal 发光球体：通道，辉度由滚动驱动，速度固定 3.0x ===== */
+.sun-portal {
+    --portal-intensity: 1;
+    --portal-speed: 3.333s; /* 10/3 ≈ 3.0x speed */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.sun-portal-layer {
+    position: absolute;
+    margin: auto;
+    mix-blend-mode: plus-lighter;
+}
+
+@keyframes sun-morph-1 {
+    0%, 100% { border-radius: 73% 27% 24% 76% / 66% 26% 74% 34%; transform: rotate(0deg) scale(0.95); }
+    50% { border-radius: 28% 72% 64% 36% / 38% 71% 29% 62%; transform: rotate(180deg) scale(1.15); }
+}
+
+@keyframes sun-morph-2 {
+    0%, 100% { border-radius: 35% 65% 69% 31% / 39% 51% 49% 61%; transform: rotate(0deg) scale(1.1); }
+    50% { border-radius: 76% 24% 28% 72% / 70% 31% 69% 30%; transform: rotate(-140deg) scale(0.9); }
+}
+
+@keyframes sun-pulse-core {
+    0%, 100% { filter: brightness(1) blur(30px); transform: scale(0.9); }
+    50% { filter: brightness(1.2) blur(40px); transform: scale(1.1); }
+}
+
+.sun-portal-atmosphere {
+    width: 87.5%;
+    height: 87.5%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(253, 224, 71, calc(0.15 * var(--portal-intensity))), transparent 70%);
+    transform: scale(1.1);
+}
+
+.sun-portal-ring {
+    width: 62.5%;
+    height: 62.5%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(253, 224, 71, 0.2) 20%, rgba(234, 88, 12, 0.1) 80%);
+    animation: sun-morph-2 calc(var(--portal-speed) * 1.5) ease-in-out infinite alternate;
+    filter: blur(40px);
+    box-shadow: 0 0 80px 40px rgba(253, 224, 71, calc(0.15 * var(--portal-intensity)));
+    opacity: calc(0.8 * var(--portal-intensity));
+}
+
+.sun-portal-body {
+    width: 50%;
+    height: 47.5%;
+    border-radius: 50%;
+    background-color: rgba(254, 240, 138, 0.5);
+    animation: sun-morph-1 var(--portal-speed) ease-in-out infinite;
+    filter: blur(24px);
+    box-shadow: 0 0 80px 40px rgba(250, 204, 21, calc(0.3 * var(--portal-intensity)));
+    opacity: calc(0.9 * var(--portal-intensity));
+}
+
+.sun-portal-core {
+    width: 35%;
+    height: 32.5%;
+    border-radius: 50%;
+    background: white;
+    animation: sun-pulse-core calc(var(--portal-speed) * 0.8) ease-in-out infinite;
+    filter: blur(20px);
+    box-shadow:
+        0 0 60px 30px rgba(255, 255, 255, calc(0.7 * var(--portal-intensity))),
+        0 0 120px 60px rgba(253, 224, 71, calc(0.5 * var(--portal-intensity))),
+        inset 0 0 40px 20px rgba(255, 255, 255, 1);
+    opacity: 1;
+}
+
+.sun-portal-hotspot {
+    width: 25%;
+    height: 22.5%;
+    border-radius: 45% 55% 40% 60%;
+    background: white;
+    animation: sun-morph-2 calc(var(--portal-speed) * 0.5) linear infinite;
+    mix-blend-mode: normal;
+    filter: blur(16px);
+    box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.9);
+    opacity: 1;
+}
+
+/* Yehua Ou: separate layer, fixed in viewport – moves up and shrinks with scroll */
+.name-layer {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.oval-name {
+    font-family: 'Climate Crisis', Georgia, serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--color-text);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Navigation on Intro */
+.nav-intro {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.nav-left {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link-intro {
+    position: relative;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+}
+
+.nav-link-intro::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background-color: color-mix(in srgb, #fff 40%, transparent);
+    transition: background-color 0.15s ease;
+}
+
+.nav-link-intro:hover {
+    opacity: 0.9;
+}
+
+.nav-link-intro:hover::after {
+    background-color: currentColor;
+}
+
+/* Scroll Down on Intro */
+.scroll-down-intro {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+}
+
+.scroll-text {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+.scroll-arrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-arrows svg {
+    width: 28px;
+    height: 28px;
+    color: var(--color-text);
+    margin-top: -10px;
+}
+
+.scroll-arrows svg:first-child {
+    margin-top: 0;
+    animation: bounceArrow 1.5s ease-in-out infinite;
+}
+
+.scroll-arrows svg:last-child {
+    animation: bounceArrow 1.5s ease-in-out infinite 0.2s;
+}
+
+@keyframes bounceArrow {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(5px); opacity: 0.5; }
+}
+
+/* Progress Bar */
+.scroll-progress {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-progress.visible {
+    opacity: 1;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: width 0.1s ease-out;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    opacity: 0;
+    visibility: hidden;
+    min-height: 100vh;
+}
+
+.main-content.visible {
+    opacity: 1;
+    visibility: visible;
+    background: var(--color-bg-second);
+}
+
+/* 过渡遮罩：覆盖 intro 和 main，实现第一页淡出→第二页淡入 */
+.transition-light-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999; /* 高于 intro-scene(9999)，覆盖整页 */
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    background: radial-gradient(
+        ellipse 120% 120% at 50% 50%,
+        rgba(255, 255, 255, 0.99) 0%,
+        rgba(255, 252, 240, 0.95) 30%,
+        rgba(255, 250, 220, 0.7) 60%,
+        rgba(255, 255, 255, 0.4) 100%
+    );
+    /* 默认无 transition，visible 时瞬间显示；fade-out 时才启用渐隐 */
+    transition: none;
+}
+
+/* 显示遮罩（用于第一页淡出） */
+.transition-light-overlay.fade-in {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.6s ease-out;
+}
+
+/* 遮罩渐隐，露出第二页 */
+.transition-light-overlay.fade-out {
+    visibility: visible;
+    opacity: 0;
+    transition: opacity 0.9s ease-in;
+}
+
+/* 过渡完全结束后遮罩彻底移出层叠与交互，避免挡住下方内容 */
+.transition-light-overlay.overlay-hidden {
+    visibility: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 过渡期间隐藏按钮横线，避免突兀 */
+body.is-transitioning .nav-link-intro::after,
+body.is-transitioning .nav-link-main::after {
+    opacity: 0;
+}
+
+/* Second page nav (Yehua Ou in center, same row as Games/About) */
+.nav-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 40px;
+    z-index: 1000;
+    background: transparent;
+}
+
+.nav-main-left {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-main-right {
+    display: flex;
+}
+
+.nav-link-main {
+    position: relative;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+}
+
+.nav-link-main::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background-color: color-mix(in srgb, currentColor 40%, transparent);
+    transition: background-color 0.15s ease;
+}
+
+.nav-link-main:hover {
+    opacity: 0.9;
+}
+
+.nav-link-main:hover::after {
+    background-color: currentColor;
+}
+
+.main-content .nav-link-main {
+    color: #111;
+}
+
+/* 确保第二页按钮横线使用文字色 40% 透明度 */
+.main-content .nav-link-main::after {
+    background-color: color-mix(in srgb, #111 40%, transparent);
+}
+
+.main-content .nav-link-main:hover::after {
+    background-color: #111;
+}
+
+.main-content .nav-main-center,
+.main-content .nav-main-name {
+    color: #111;
+}
+
+/* ===== 二级分页 (Games / UI/UX / Digital Art / About) ===== */
+body.subpage {
+    background: var(--color-bg-second);
+    color: #111;
+}
+
+/* 与首页 IN BETWEEN 同字体与格式，标题在页面上方（仅 Games / UI/UX / Digital Art） */
+.subpage-title-banner {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 8vh 6vw 10vh 6vw;
+    box-sizing: border-box;
+}
+
+.subpage-title-banner-with-gallery {
+    min-height: 0;
+    padding-bottom: 4vh;
+}
+
+.subpage-headline {
+    font-family: var(--font-display);
+    font-size: 12vw;
+    font-weight: 700;
+    line-height: 90%;
+    margin: 0;
+    color: #111;
+    text-align: center;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subpage-headline.subpage-headline-twoline {
+    white-space: normal;
+}
+
+.nav-main-subpage .nav-link-main {
+    color: #111;
+}
+
+.nav-main-subpage .nav-link-main::after {
+    background-color: color-mix(in srgb, #111 40%, transparent);
+}
+
+.nav-main-subpage .nav-link-main:hover::after {
+    background-color: #111;
+}
+
+.nav-main-name-link {
+    font-family: 'Climate Crisis', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-main-name-link:hover {
+    color: #111;
+    opacity: 1;
+}
+
+.nav-link-current {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.nav-link-current::after {
+    display: none;
+}
+
+.subpage-content {
+    padding-top: 100px;
+    padding-bottom: 4rem;
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.subpage-hero {
+    margin-bottom: 3rem;
+}
+
+.subpage-title {
+    font-family: var(--font-body);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 0.75rem;
+}
+
+.subpage-lead {
+    font-size: 1.1rem;
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 1.6;
+}
+
+.subpage-list {
+    min-height: 40vh;
+}
+
+/* Digital Art：标题紧贴内容、几乎满屏、页边距很小 */
+/* 与 Games/UI/UX 一致：main 仅顶部留白，网格区自己 80px 左右边距，above-footer + footer 通栏 */
+.digital-art-content {
+    padding-top: 4vh;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+}
+
+.digital-art-content .subpage-list {
+    min-height: 0;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.digital-art-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.digital-art-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+.digital-art-row.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.digital-art-row.digital-art-row-instant {
+    transition: none;
+}
+
+.digital-art-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.digital-art-item-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.digital-art-preview {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #b0b0b0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+.digital-art-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.digital-art-preview-fallback {
+    position: absolute;
+    inset: 0;
+}
+
+.digital-art-title {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111;
+    margin: 4px 0 2px;
+}
+
+.digital-art-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 1.35;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .digital-art-grid {
+        gap: 1.75rem;
+    }
+    .digital-art-row {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+}
+
+.subpage-about .about-text {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.8;
+}
+
+/* 第二页画廊卡片：可点击，暂无跳转 */
+.gallery-card-link {
+    cursor: pointer;
+}
+
+.nav-main-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--color-text);
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: opacity 0.3s ease;
+}
+
+.nav-main-center:focus {
+    outline: none;
+}
+
+.nav-main-name {
+    font-family: 'Climate Crisis', Georgia, serif;
+    font-weight: 600;
+}
+
+/* Cover Section：100vh，草地固定；滚轮先驱动内部进度显示文字并上移到居中，进度到 1 后才允许页面真正滚动 */
+.cover-section {
+    width: 100%;
+    height: 100vh;
+    background: var(--color-bg-second);
+    position: relative;
+}
+
+.cover-bg {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+}
+
+/* 文字容器：覆盖在草地上方，由 JS 用内部进度驱动位移动画，不依赖页面 scrollY */
+.cover-motion-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.cover-motion-text {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    color: #0f2e16;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25em;
+}
+
+.motion-line {
+    display: block;
+    text-align: center;
+}
+
+.motion-line .motion-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    transition-delay: calc(var(--word-i, 0) * 0.06s);
+}
+
+.motion-line.revealed .motion-word {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== About Section ===== */
+.about-section {
+    padding: 120px 40px 0 40px;
+    margin-bottom: 0;
+    background: var(--color-bg-second);
+}
+
+.about-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-title {
+    font-family: var(--font-body);
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.main-content .about-title {
+    color: #111;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+}
+
+.main-content .about-text {
+    color: #333;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* 首页 About 段：与 “About Me” 标题字号、字重一致 */
+.main-content #about .about-text {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* ===== Projects Parallax Gallery：由 React ParallaxGallery.jsx（replica）渲染，此处仅包一层 ===== */
+#galleryRoot {
+    margin: 0;
+    padding: 0;
+    background: var(--color-bg-second);
+}
+/* 对角 zigzag 条带随页滚动，总高 = 条带 + 80vh，由组件内联设置 */
+.parallax-gallery-section {
+    min-height: 0;
+}
+.projects-gallery {
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+    background: var(--color-bg-second);
+    overflow: visible;
+}
+.about-section + .projects-gallery {
+    margin-top: 200px;
+}
+
+/* ===== 最后一张图下方留白 + 返回顶部 ===== */
+.above-footer {
+    min-height: 28vh;
+    padding: 0 40px;
+    background: var(--color-bg-second);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.back-to-top {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #333;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 0.6rem 1.4rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.back-to-top:hover {
+    border-color: #111;
+    color: #111;
+}
+
+/* ===== Footer ===== */
+.footer {
+    position: relative;
+    z-index: 10;
+    padding: 3rem 40px;
+    background: var(--color-bg-second);
+    border-top: 1px solid #eee;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.footer-email {
+    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.footer-email a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-email a:hover {
+    text-decoration: underline;
+}
+
+.main-content .copyright {
+    color: #333;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1024px) {
+    .content-layer {
+        padding: 8vh 6vw 8vh 6vw;
+    }
+    
+    .intro-headline,
+    .subpage-headline {
+        font-size: clamp(3.5rem, 13vw, 12rem);
+    }
+    
+    .intro-make-things {
+        font-size: clamp(1.1rem, 3vw, 2.25rem);
+    }
+    
+    .intro-sub-text {
+        font-size: clamp(2.2rem, 6vw, 4.5rem);
+    }
+    
+    .intro-cta {
+        font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    }
+    
+    .intro-text-left {
+        max-width: 42em;
+    }
+    
+    .intro-tagline {
+        font-size: clamp(1.1rem, 3vw, 1.65rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .content-layer {
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+        padding: 12vh 6vw;
+    }
+    
+    .intro-headline {
+        font-size: clamp(2.8rem, 11vw, 9rem);
+    }
+    
+    .intro-bottom-row {
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+        margin-bottom: 0;
+    }
+    
+    .intro-text-left {
+        align-items: center;
+        text-align: center;
+        max-width: 36em;
+    }
+    
+    .intro-divider {
+        margin: 0 auto;
+    }
+    
+    .intro-tagline {
+        text-align: center;
+        margin-bottom: 0;
+    }
+    
+    .intro-text-right {
+        justify-self: center;
+        text-align: center;
+    }
+    
+    .intro-make-things {
+        font-size: clamp(1.1rem, 3vw, 2.25rem);
+    }
+    
+    .intro-sub-text {
+        font-size: clamp(2.2rem, 6vw, 4.5rem);
+    }
+    
+    .portal-layer {
+        position: relative;
+        order: 2;
+        height: auto;
+        inset: auto;
+    }
+    
+    .portal-container {
+        width: 105vh;
+        height: 105vh;
+    }
+    
+    .nav-intro {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+    }
+    
+    .nav-left {
+        gap: 15px;
+    }
+    
+    .nav-link-intro {
+        font-size: 0.9rem;
+    }
+    
+    .scroll-down-intro {
+        bottom: 30px;
+    }
+    
+    .about-section {
+        padding: 80px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-headline,
+    .subpage-headline {
+        font-size: clamp(2.2rem, 10vw, 7rem);
+        letter-spacing: 0.05em;
+    }
+    
+    .intro-make-things {
+        font-size: 1rem;
+    }
+    
+    .intro-sub-text {
+        font-size: 2rem;
+    }
+    
+    .intro-cta {
+        font-size: clamp(1.3rem, 3vw, 1.9rem);
+    }
+    
+    .intro-tagline {
+        font-size: clamp(1rem, 2.8vw, 1.4rem);
+    }
+    
+    .portal-container {
+        width: 105vh;
+        height: 105vh;
+    }
+    
+    .oval-name {
+        font-size: 1.2rem;
+    }
+    
+    .nav-intro {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+/* ===== No scrollbar on entire site (scroll still works, bar is hidden) ===== */
+html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* ===== 第二页与二级分页：侧边常驻滚动条 ===== */
+html:has(.main-content.visible),
+html:has(body.subpage) {
+    scrollbar-width: thin;
+    -ms-overflow-style: auto;
+}
+
+html:has(.main-content.visible)::-webkit-scrollbar,
+html:has(body.subpage)::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+}
+
+html:has(.main-content.visible)::-webkit-scrollbar-track,
+html:has(body.subpage)::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+html:has(.main-content.visible)::-webkit-scrollbar-thumb,
+html:has(body.subpage)::-webkit-scrollbar-thumb {
+    background: #0f2e16;
+    border-radius: 5px;
+}
+
+html:has(.main-content.visible)::-webkit-scrollbar-thumb:hover,
+html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
+    background: #0d2612;
+}
+
+/* ===== About 页：黑底 + 发光球 + 双段文字，滚动驱动球位移与文字淡入淡出 ===== */
+.about-page {
+    background: #fff;
+}
+.about-page .nav-link-main {
+    color: #111;
+}
+.about-page .nav-link-main:hover {
+    color: #111;
+}
+.about-page .nav-main-name-link {
+    color: #111;
+}
+.about-page .nav-main-name-link:hover {
+    color: #111;
+    opacity: 1;
+}
+.about-page .nav-link-current {
+    color: #111;
+}
+
+/* About 页：左文右图 + 底部灰色条（滚动字 + 掉落标签） */
+.about-main {
+    padding-top: 100px;
+    padding-bottom: 0;
+}
+
+.about-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 6vw, 15rem);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 3rem clamp(24px, 5vw, 96px) 4rem;
+    min-height: auto;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .about-hero {
+        gap: clamp(1.5rem, 4vw, 4rem);
+        padding: 3rem clamp(24px, 4vw, 64px) 3rem;
+    }
+}
+
+.about-hero-left {
+    flex: 1;
+    max-width: 50%;
+    min-width: 0;
+}
+
+.about-hero-intro {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.05rem + 1.35vw, 2.6rem);
+    font-weight: 600;
+    line-height: 1.45;
+    color: #333;
+    margin: 0;
+    max-width: 100%;
+}
+
+.about-hero-right {
+    flex: 0 0 auto;
+    width: 520px;
+    height: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-hero-img {
+    width: 100%;
+    height: 100%;
+    background: url('backgroundimg/Me.jpeg') center/cover no-repeat;
+    border-radius: 4px;
+}
+
+.about-hero-name {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0.75rem 0 0;
+    padding: 0;
+}
+
+/* 底部灰色条 */
+.about-strip {
+    background: #e8e8e8;
+    padding: 0 0 4rem;
+    overflow: hidden;
+}
+
+/* 两行横向滚动字：贴灰色区域顶端，两行都完整显示 */
+.about-scroll-rows {
+    padding: 0.5em 0 1.25em 0;
+    margin-bottom: 3rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    overflow: hidden;
+    min-height: 1.2em;
+}
+
+.about-scroll-row {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    animation: about-scroll-run 35s linear infinite;
+    line-height: 1.25;
+}
+
+.about-scroll-row-2 {
+    animation-direction: reverse;
+    animation-duration: 40s;
+}
+
+.about-scroll-inner {
+    padding: 0 2rem;
+    font-family: var(--font-body);
+    font-size: clamp(2.75rem, 4.5vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #333;
+}
+
+@keyframes about-scroll-run {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+}
+
+/* 掉落标签容器：左右留页边距，标签不超出边界、不嵌进墙 */
+.about-falling-wrap {
+    position: relative;
+    min-height: 400px;
+    overflow: visible;
+    padding: 0 32px;
+    box-sizing: border-box;
+}
+
+.about-falling-tags {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: visible;
+}
+
+.about-falling-tags.is-ceiling .about-tag {
+    transition: none;
+}
+
+.about-tag {
+    position: absolute;
+    padding: 0.75rem 1.4rem;
+    font-family: var(--font-body);
+    font-size: 1.35rem;
+    font-weight: 700;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    pointer-events: none;
+    will-change: transform;
+    border: none;
+}
+
+.about-tag.about-tag--dark {
+    background: #111;
+    color: #fff;
+}
+
+.about-tag.about-tag--light {
+    background: #fff;
+    color: #111;
+}
+
+@media (max-width: 900px) {
+    .about-hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 24px 3rem;
+    }
+    .about-hero-left {
+        max-width: 100%;
+    }
+    .about-hero-right {
+        flex: 0 0 auto;
+        width: min(520px, 100%);
+        height: min(580px, 70vh);
+        align-items: center;
+    }
+    .about-hero-name {
+        text-align: center;
+    }
+}
+
+.about-footer {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.about-footer .footer-content,
+.about-footer .copyright,
+.about-footer .footer-email,
+.about-footer .footer-email a {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Selection ===== */
+::selection {
+    background: var(--color-text);
+    color: var(--color-bg);
+}

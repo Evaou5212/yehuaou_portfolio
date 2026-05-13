@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yehua Ou</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../../styles.css">
+  <style>
+    #page-scroll-wrap {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: auto;
+      overscroll-behavior-y: contain;
+    }
+    #page-scroll-wrap::-webkit-scrollbar { display: block; width: 10px; }
+    #page-scroll-wrap::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); }
+    #page-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.2); border-radius: 5px; }
+    #page-scroll-wrap::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.35); }
+    @supports (scrollbar-width: thin) {
+      #page-scroll-wrap { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.04); }
+    }
+    body.project-page { overflow-x: visible !important; }
+    .project-page { font-family: var(--font-body); }
+    .project-page h1, .project-page h2, .project-page h3, .project-page h4 { font-family: var(--font-display); }
+    .project-page .hero-inner {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 64rem;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes hero-enter {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .project-page .hero-title {
+      white-space: nowrap;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 2.75rem 0 !important;
+      padding: 0 !important;
+      opacity: 0;
+      animation: hero-enter 0.9s ease-out forwards;
+      font-size: clamp(2.5rem, 6vw + 2rem, 11rem);
+    }
+    .project-page .hero-subtitle {
+      text-align: center;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0;
+      animation: hero-enter 0.7s ease-out 0.25s forwards;
+    }
+    .project-img-wrap { background: transparent; max-width: 100%; display: block; overflow: visible; }
+    .project-section-img {
+      max-width: 100%; width: auto; height: auto; display: block;
+      object-fit: contain; vertical-align: middle;
+    }
+    .project-intro-prose, .project-intro-prose p { font-size: 1.25rem; line-height: 1.7; }
+  </style>
+</head>
+<body class="project-page min-h-screen bg-white text-gray-900">
+  <div id="page-scroll-wrap">
+  <nav class="nav-main nav-main-subpage">
+    <div class="nav-main-left">
+      <a href="../../../games.html" class="nav-link-main">Games</a>
+      <a href="../../../uiux.html" class="nav-link-main">UI/UX</a>
+      <a href="../../../digital-art.html" class="nav-link-main">Digital Art</a>
+    </div>
+    <div class="nav-main-center">
+      <a href="../../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+    </div>
+    <div class="nav-main-right">
+      <a href="../../../about.html" class="nav-link-main">About</a>
+    </div>
+  </nav>
+
+  <header class="relative h-screen overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="scene1.JPG" alt="GRWM — Get Ready With Me" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+    <div class="hero-inner relative z-10 text-white">
+      <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tight">
+        GRWM
+      </h1>
+      <p class="hero-subtitle text-xl md:text-2xl font-light opacity-90 leading-relaxed">
+        A p5.js browser game inspired by “Get ready with me” vlogs.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-24 space-y-20">
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-10">
+      <div class="md:col-span-4 space-y-8 sticky top-32">
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Project Type</h3>
+          <p class="text-xl font-medium">Browser Game</p>
+        </div>
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Tools</h3>
+          <p class="text-xl font-medium">p5.js, Procreate</p>
+        </div>
+      </div>
+      <div class="md:col-span-8 space-y-6">
+        <h2 class="text-2xl font-medium text-gray-900">Game Description</h2>
+        <div class="prose prose-lg text-gray-600 font-light leading-relaxed project-intro-prose">
+          <p>
+            I was inspired by the "Get ready with me" vlogs on social medias. In those vlogs, vloggers record the whole preparation process before they go out. So, I want to make my preparation process before I go to school in the morning in the form of a game. Basically, the process includes two steps: Making breakfast and putting on make up. I was planning to make a third scene of helping the main character pack her bag, but time is limited to me, and by the submission time I can't be able to make it.
+          </p>
+          <p>
+            In the first step, I want players to make a sandwich by stacking one element on top of another. When it is done, the NEXT button appears and players can move on to the next step. In the second step, players need to click on the cosmetics in order and drag it to the character's face perspectively to help her put the make up on. When it is done, the game ends.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-6">
+      <h2 class="text-3xl font-medium text-gray-900">Play the Game</h2>
+      <!-- 只显示游戏画布：裁掉 p5 顶栏和底栏，容器与画布同比例、无灰框 -->
+      <div class="p5-embed-wrap overflow-hidden mx-auto" style="max-width: 600px; aspect-ratio: 3/2;">
+        <iframe
+          src="https://editor.p5js.org/Eva5212/full/Lt_BbcLY5"
+          class="p5-embed-iframe"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          title="GRWM — p5.js Game"
+        ></iframe>
+      </div>
+    <style>
+      .p5-embed-wrap { position: relative; background: #fff; }
+      .p5-embed-iframe {
+        position: absolute;
+        left: 0;
+        top: -48px;
+        width: 100%;
+        height: calc(100% + 48px + 36px);
+        border: none;
+        pointer-events: auto;
+      }
+    </style>
+      <p class="text-center text-gray-500 text-sm">
+        <a href="https://editor.p5js.org/Eva5212/full/Lt_BbcLY5" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-700">Open in p5.js Editor</a>
+      </p>
+    </section>
+
+    <section class="space-y-8">
+      <h2 class="text-3xl font-medium text-gray-900">Design Sketches</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="project-img-wrap"><img src="sketch1.JPG" alt="Design sketch 1" class="project-section-img w-full" /></div>
+        <div class="project-img-wrap"><img src="sketch2.JPG" alt="Design sketch 2" class="project-section-img w-full" /></div>
+        <div class="project-img-wrap"><img src="sketch3.JPG" alt="Design sketch 3" class="project-section-img w-full" /></div>
+        <div class="project-img-wrap"><img src="sketch4.JPG" alt="Design sketch 4" class="project-section-img w-full" /></div>
+      </div>
+    </section>
+
+    <section class="space-y-8">
+      <h2 class="text-3xl font-medium text-gray-900">Scene Screenshots</h2>
+      <div class="project-img-wrap w-full">
+        <img src="scene1.JPG" alt="GRWM scene 1" class="project-section-img w-full" />
+      </div>
+      <div class="project-img-wrap w-full">
+        <img src="scene2.JPG" alt="GRWM scene 2" class="project-section-img w-full" />
+      </div>
+      <div class="project-img-wrap w-full">
+        <img src="scene3.JPG" alt="GRWM scene 3" class="project-section-img w-full" />
+      </div>
+    </section>
+
+    <section class="space-y-8">
+      <h2 class="text-3xl font-medium text-gray-900">Reflection</h2>
+      <div class="prose prose-lg text-gray-600 font-light leading-relaxed project-intro-prose">
+        <p>
+          Making this game kind of push me to learn to make my coding more organized. Because this game includes more scenes, so the entire code is long, I need to really make it concise and structured to help me better check how each part works and easy for me to debug. For the game mechanism, actually there are a few effects that I tried to make but failed. For example, in the first step of the preparation process, I want the code to check if players have stacked the ingredients all together, if not, players may not pass the game, and the ingredient that is not on top of the previous one will appear on the top of the screen again and make players to play again until they are stacked. But my coding ability doesn't allow me to write such a complex mechanism, so at the end I just made players to click their mouse and let the ingredients fall down. Besides, for the second steps, originally I want to make players to draw and color the face after choosing a cosmetics. But during the coding process, I found it is hard for me to make players color in specific area of the screen but not outside of it. So I compromise again to make a simpler mechanism that players just press their mouse and drag the cosmetics in the right place, and I just simply replace the images of the main character to tell players that they are doing the right thing and can move to the next step.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-gray-200 py-16 text-center text-gray-400 text-sm">
+    <p>&copy; 2026 Yehua Ou.</p>
+  </footer>
+  </div>
+</body>
+</html>
