@@ -9,18 +9,9 @@ const projects = [
   { id: 2, title: 'Trust Reconstruction', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/marine%20game/Loggerhead/index.html', image: '/GAMES/marine%20game/Cover.png' },
   { id: 15, title: 'GRWM', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/GRWM/index.html', image: '/GAMES/GRWM/scene1.JPG' },
   { id: 16, title: 'Irasutoya Cooking Game', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/Irasutoya-Cooking-Game/index.html', image: '/GAMES/Irasutoya-Cooking-Game/cover.png', hideFromHomepage: true },
-  { id: 3, title: 'Spatial Interface', category: 'UX Design', aspectRatio: 'landscape' },
-  { id: 4, title: 'Neon Tokyo', category: 'Photography', aspectRatio: 'landscape' },
-  { id: 5, title: 'Abstract Forms', category: '3D Art', aspectRatio: 'landscape' },
-  { id: 6, title: 'Analog Dreams', category: 'Installation', aspectRatio: 'landscape' },
-  { id: 7, title: 'Cyber Structure', category: 'Architecture', aspectRatio: 'landscape' },
-  { id: 8, title: 'Minimalist Hub', category: 'Web Design', aspectRatio: 'landscape' },
-  { id: 9, title: 'Future Wear', category: 'Fashion Tech', aspectRatio: 'landscape' },
-  { id: 10, title: 'Glass Ecosystem', category: 'Render', aspectRatio: 'landscape' },
-  { id: 11, title: 'Bio Synth', category: 'R&D', aspectRatio: 'landscape' },
-  { id: 12, title: 'Kinetic Soul', category: 'Motion', aspectRatio: 'landscape' },
-  { id: 13, title: 'Urban Decay', category: 'Photography', aspectRatio: 'landscape' },
-  { id: 14, title: 'Deep Mind', category: 'AI Art', aspectRatio: 'landscape' },
+  { id: 17, title: 'Lorde — Visual Re-creation', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/lorde/index.html', image: '/DIGITAL_ART/TD_practices/lorde/lorde1.gif' },
+  { id: 18, title: 'Experimental Camera', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/experimental_camera/index.html', image: '/DIGITAL_ART/TD_practices/experimental_camera/cover.gif' },
+  { id: 19, title: 'VJ Controller', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/hikaru_utada/index.html', image: '/DIGITAL_ART/TD_practices/hikaru_utada/cover.gif' },
 ];
 
 const CELL_ASPECT_RATIO = 0.75;

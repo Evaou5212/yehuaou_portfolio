@@ -672,6 +672,16 @@ body.is-transitioning .nav-link-main::after {
     color: #111;
 }
 
+/* ===== 暂时隐藏 UI/UX（恢复时删除本段） ===== */
+a.nav-link-intro[href*="uiux.html"],
+a.nav-link-main[href*="uiux.html"] {
+    display: none !important;
+}
+body.uiux-temporarily-hidden .subpage-title-banner,
+body.uiux-temporarily-hidden main {
+    display: none !important;
+}
+
 /* ===== 二级分页 (Games / UI/UX / Digital Art / About) ===== */
 body.subpage {
     background: var(--color-bg-second);
