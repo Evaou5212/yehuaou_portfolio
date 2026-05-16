@@ -1,5 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import './analytics.jsx'
 import ShaderBackground from './ShaderBackground.jsx'
 import ParallaxGallery from './ParallaxGallery.jsx'
 
