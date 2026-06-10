@@ -711,18 +711,6 @@ body.subpage {
     white-space: normal;
 }
 
-.nav-main-subpage .nav-link-main {
-    color: #111;
-}
-
-.nav-main-subpage .nav-link-main::after {
-    background-color: color-mix(in srgb, #111 40%, transparent);
-}
-
-.nav-main-subpage .nav-link-main:hover::after {
-    background-color: #111;
-}
-
 .nav-main-name-link {
     font-family: 'Climate Crisis', Georgia, serif;
     font-size: 1.75rem;
@@ -1310,23 +1298,6 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
 .about-page {
     background: #fff;
 }
-.about-page .nav-link-main {
-    color: #111;
-}
-.about-page .nav-link-main:hover {
-    color: #111;
-}
-.about-page .nav-main-name-link {
-    color: #111;
-}
-.about-page .nav-main-name-link:hover {
-    color: #111;
-    opacity: 1;
-}
-.about-page .nav-link-current {
-    color: #111;
-}
-
 /* About 页：左文右图 + 底部灰色条（滚动字 + 掉落标签） */
 .about-main {
     padding-top: 100px;
@@ -1710,57 +1681,30 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
 }
 
 
-/* 仅首页/第二页使用 difference 白色导航（勿作用于分页面） */
-body.no-scroll .nav-link-intro,
-.main-content .nav-main .nav-link-main,
-.main-content .nav-main .nav-main-center,
-.main-content .nav-main .nav-main-name,
-.main-content .nav-main .nav-main-name-link {
+/* 全站导航 difference：白色字 + 悬停变灰（随背景反色） */
+.nav-main .nav-link-main,
+.nav-main .nav-main-center,
+.nav-main .nav-main-name,
+.nav-main .nav-main-name-link,
+.nav-link-intro {
     color: #fff !important;
 }
 
-.main-content .nav-main .nav-link-main::after {
+.nav-main .nav-link-main::after {
     background-color: rgba(255, 255, 255, 0.4) !important;
 }
 
-.main-content .nav-main .nav-link-main {
+.nav-main .nav-link-main {
     transition: color 0.2s ease, opacity 0.3s ease;
 }
 
-.main-content .nav-main .nav-link-main:hover {
+.nav-main .nav-link-main:hover {
     color: #808080 !important;
     opacity: 1;
 }
 
-.main-content .nav-main .nav-link-main:hover::after {
+.nav-main .nav-link-main:hover::after {
     background-color: currentColor !important;
-}
-
-/* 分页面：黑色导航，与线上一致 */
-body.subpage .nav-main {
-    mix-blend-mode: normal;
-}
-
-body.subpage .nav-main .nav-link-main,
-body.subpage .nav-main .nav-main-name-link {
-    color: #111 !important;
-}
-
-body.subpage .nav-main .nav-link-main::after {
-    background-color: color-mix(in srgb, #111 40%, transparent) !important;
-}
-
-body.subpage .nav-main .nav-link-main {
-    transition: color 0.2s ease, opacity 0.3s ease;
-}
-
-body.subpage .nav-main .nav-link-main:hover {
-    color: #111 !important;
-    opacity: 0.9;
-}
-
-body.subpage .nav-main .nav-link-main:hover::after {
-    background-color: #111 !important;
 }
 
 /* ===== 第一页导航自适应（与 nav-main 同比例）===== */
