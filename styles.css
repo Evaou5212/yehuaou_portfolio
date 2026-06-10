@@ -1681,13 +1681,28 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
 }
 
 
-/* 全站导航 difference：白色字 + 悬停变灰（随背景反色） */
+/* 全站导航 difference：
+   CSS 必须为 #fff（与浅底相同时反色为深色）；DevTools 会显示白色，属正常。
+   视觉偏粗时靠字重 + 抗锯齿微调，不必改回 #111。 */
 .nav-main .nav-link-main,
 .nav-main .nav-main-center,
 .nav-main .nav-main-name,
 .nav-main .nav-main-name-link,
 .nav-link-intro {
     color: #fff !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.nav-main .nav-link-main,
+.nav-link-intro {
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.nav-main .nav-main-name-link {
+    font-weight: 400;
+    letter-spacing: 0.03em;
 }
 
 .nav-main .nav-link-main::after {
