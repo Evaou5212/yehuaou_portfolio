@@ -111,6 +111,18 @@
                     </span>
                 </div>
             </div>
+            <!-- Scroll Down（与第一页一致，颜色同草地文字） -->
+            <div class="scroll-down-intro scroll-down-cover" aria-hidden="true">
+                <span class="scroll-text">SCROLL DOWN</span>
+                <div class="scroll-arrows">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
         </section>
 
         <!-- About Section -->
@@ -147,5 +159,30 @@
     <script type="module" src="src/main.jsx"></script>
     <script src="js/grass-bg.js"></script>
     <script src="js/script.js"></script>
+    <script>
+    /* 草地文字自适应：保持三行，超出窗口宽度时整体等比缩小字号 */
+    (function () {
+        var text = document.getElementById('coverMotionText');
+        if (!text) return;
+        function fitCoverText() {
+            text.style.fontSize = '';
+            var wrap = text.parentElement;
+            var avail = (wrap ? wrap.clientWidth : window.innerWidth) * 0.92;
+            if (!avail) return;
+            var maxW = 0;
+            text.querySelectorAll('.motion-line').forEach(function (line) {
+                maxW = Math.max(maxW, line.scrollWidth);
+            });
+            if (maxW > avail) {
+                var cur = parseFloat(window.getComputedStyle(text).fontSize);
+                text.style.fontSize = Math.max(12, cur * avail / maxW) + 'px';
+            }
+        }
+        window.addEventListener('resize', fitCoverText);
+        window.addEventListener('load', fitCoverText);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCoverText);
+        fitCoverText();
+    })();
+    </script>
 </body>
 </html>

@@ -7,12 +7,18 @@ import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
 const projects = [
   { id: 1, title: 'The Algorithmic Garden', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/The-Algorithmic-Garden/index.html', image: '/DIGITAL_ART/The-Algorithmic-Garden/cover.png' },
   { id: 2, title: 'Trust Reconstruction', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/marine%20game/Loggerhead/index.html', image: '/GAMES/marine%20game/Cover.png' },
+  { id: 3, title: 'Lorde — Visual Re-creation', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/lorde/index.html', image: '/DIGITAL_ART/TD_practices/lorde/lorde1.gif' },
+  { id: 4, title: 'Experimental Camera', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/experimental_camera/index.html', image: '/DIGITAL_ART/TD_practices/experimental_camera/cover.gif' },
+  { id: 5, title: 'VJ Controller', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/hikaru_utada/index.html', image: '/DIGITAL_ART/TD_practices/hikaru_utada/cover.gif' },
+  { id: 6, title: 'Creative Coding', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/creative_coding/index.html', image: '/DIGITAL_ART/creative_coding/cover.png' },
+  { id: 7, title: 'The Gaokao Factory', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/Gaokao/index.html', image: '/DIGITAL_ART/Gaokao/cover.png' },
   { id: 15, title: 'GRWM', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/GRWM/index.html', image: '/GAMES/GRWM/scene1.JPG' },
   { id: 16, title: 'Irasutoya Cooking Game', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/Irasutoya-Cooking-Game/index.html', image: '/GAMES/Irasutoya-Cooking-Game/cover.png', hideFromHomepage: true },
-  { id: 17, title: 'Lorde — Visual Re-creation', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/lorde/index.html', image: '/DIGITAL_ART/TD_practices/lorde/lorde1.gif' },
-  { id: 18, title: 'Experimental Camera', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/experimental_camera/index.html', image: '/DIGITAL_ART/TD_practices/experimental_camera/cover.gif' },
-  { id: 19, title: 'VJ Controller', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/hikaru_utada/index.html', image: '/DIGITAL_ART/TD_practices/hikaru_utada/cover.gif' },
+  { id: 17, title: 'Dingdong Maicai', category: 'UI/UX', aspectRatio: 'landscape', href: '/UIUX/Dingdong%20redesign/index.html', image: '/UIUX/Dingdong%20redesign/cover.png' },
 ];
+
+// 第二首页展示顺序：UI/UX → Algorithmic Garden（提前至第 2）→ Games 前两个 → Digital Art 前四个
+const HOMEPAGE_ORDER = [17, 1, 2, 15, 3, 4, 5];
 
 const CELL_ASPECT_RATIO = 0.75;
 const SUBPAGE_CELL_ASPECT_RATIO = 0.6;
@@ -56,7 +62,9 @@ function progressToEased(t) {
 }
 
 function getFilteredProjects(category) {
-  if (!category) return projects.filter((p) => !p.hideFromHomepage)
+  if (!category) {
+    return HOMEPAGE_ORDER.map((id) => projects.find((p) => p.id === id)).filter(Boolean);
+  }
   if (category === 'Games') return projects.filter((p) => p.category === 'Games')
   if (category === 'UI/UX') return projects.filter((p) => p.category === 'UI/UX' || p.category === 'UX Design')
   if (category === 'Digital Art') return projects.filter((p) => p.category === 'Digital Art')
@@ -156,10 +164,11 @@ function ZigZagItem({ project, index, currentStep, columns, totalItems, cellAspe
           )}
         </motion.div>
         <div style={{ position: 'absolute', top: 16, left: 16, zIndex: 10 }}>
-          <span style={{ fontSize: 12, fontFamily: 'monospace', color: 'rgba(0,0,0,0.4)' }}>0{index + 1}</span>
+          <span className="gallery-card-index" style={{ fontFamily: 'monospace', color: 'rgba(0,0,0,0.4)' }}>0{index + 1}</span>
         </div>
       </div>
       <motion.div
+        className="gallery-card-caption"
         style={{
           opacity: textOpacity,
           y: textY,
@@ -171,10 +180,10 @@ function ZigZagItem({ project, index, currentStep, columns, totalItems, cellAspe
           alignItems: 'flex-start',
         }}
       >
-        <h3 style={{ fontSize: 18, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#111', margin: '0 0 4px 0' }}>
+        <h3 className="gallery-card-title" style={{ fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#111', margin: '0 0 4px 0' }}>
           {project.title}
         </h3>
-        <p style={{ fontSize: 16, fontWeight: 400, color: 'rgba(0,0,0,0.5)', lineHeight: 1.4, margin: 0 }}>
+        <p className="gallery-card-category" style={{ fontWeight: 400, color: 'rgba(0,0,0,0.5)', lineHeight: 1.4, margin: 0 }}>
           {project.category} — Digital Frontier
         </p>
       </motion.div>

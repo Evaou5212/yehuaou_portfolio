@@ -4,13 +4,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/copy-site-static.mjs",
+    "build": "vite build && node scripts/copy-site-static.mjs && node scripts/inject-vercel-analytics-html.mjs",
     "serve": "vite --port 8080",
     "preview": "vite preview"
   },
   "dependencies": {
     "@react-three/fiber": "^9.5.0",
     "@shadergradient/react": "^2.4.20",
+    "@vercel/analytics": "^2.0.1",
     "camera-controls": "^3.1.2",
     "framer-motion": "^12.33.0",
     "react": "^19.2.0",

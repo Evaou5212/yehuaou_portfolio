@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yehua Ou</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    #page-scroll-wrap {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: auto;
+      overscroll-behavior-y: contain;
+    }
+    #page-scroll-wrap::-webkit-scrollbar { display: block; width: 10px; }
+    #page-scroll-wrap::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); }
+    #page-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.2); border-radius: 5px; }
+    #page-scroll-wrap::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.35); }
+    @supports (scrollbar-width: thin) {
+      #page-scroll-wrap { scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.04); }
+    }
+    body.project-page { overflow-x: visible !important; }
+    .project-page { font-family: var(--font-body); }
+    .project-page h1, .project-page h2, .project-page h3, .project-page h4 { font-family: var(--font-display); }
+    .project-page .hero-inner {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 64rem;
+      padding: 0 1.5rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes hero-enter {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .project-page .hero-title {
+      white-space: nowrap;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 2.75rem 0 !important;
+      padding: 0 !important;
+      opacity: 0;
+      animation: hero-enter 0.9s ease-out forwards;
+      font-size: clamp(2.5rem, 6vw + 2rem, 11rem);
+    }
+    .project-page .hero-subtitle {
+      text-align: center;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0;
+      animation: hero-enter 0.7s ease-out 0.25s forwards;
+      white-space: nowrap;
+      font-size: clamp(0.75rem, 1.8vw + 0.4rem, 1.5rem);
+    }
+    .project-intro-prose,
+    .project-intro-prose p {
+      font-size: 1.25rem;
+      line-height: 1.7;
+    }
+    .project-page main p.text-gray-600,
+    .project-page main div.text-gray-600 p {
+      font-size: 1.25rem;
+      line-height: 1.7;
+    }
+    .visual-metaphors-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .visual-metaphor-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+    .visual-metaphor-item .vm-video-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 2px;
+      background: #111;
+    }
+    .visual-metaphor-item .vm-video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .visual-metaphor-item .vm-text h4 {
+      font-size: 1.75rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="project-page min-h-screen bg-white text-gray-900">
+  <div id="page-scroll-wrap">
+  <nav class="nav-main nav-main-subpage">
+    <div class="nav-main-left">
+      <a href="../../games.html" class="nav-link-main">Games</a>
+      <a href="../../uiux.html" class="nav-link-main">UI/UX</a>
+      <a href="../../digital-art.html" class="nav-link-main">Digital Art</a>
+    </div>
+    <div class="nav-main-center">
+      <a href="../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+    </div>
+    <div class="nav-main-right">
+      <a href="../../about.html" class="nav-link-main">About</a>
+    </div>
+  </nav>
+
+  <header class="relative h-screen overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="/DIGITAL_ART/Gaokao/cover.png" alt="The Gaokao Factory cover" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+    <div class="hero-inner relative z-10 text-white">
+      <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tight">
+        The Gaokao Factory
+      </h1>
+      <p class="hero-subtitle text-xl md:text-2xl font-light opacity-90 leading-relaxed">
+        A series of AI-generated videos exploring the collective experience of academic competition.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-24 space-y-20">
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-10">
+      <div class="md:col-span-4 space-y-8 sticky top-32">
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Project Type</h3>
+          <p class="text-xl font-medium">AIGC Video Series</p>
+        </div>
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Year</h3>
+          <p class="text-xl font-medium">2026</p>
+        </div>
+        <div class="space-y-2">
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400">Tools</h3>
+          <p class="text-xl font-medium">AI-assisted image &amp; video workflows</p>
+        </div>
+      </div>
+      <div class="md:col-span-8 space-y-6">
+        <div class="prose prose-lg text-gray-600 font-light leading-relaxed project-intro-prose">
+          <p>
+            <em>The Gaokao Factory</em> is a series of short AI-generated videos that explores the collective experience of academic competition through surreal yet familiar visual metaphors. Rather than depicting classrooms, exams, or school life directly, the project reimagines the high-stakes educational journey as a collection of industrial systems, consumer products, and automated infrastructures.
+          </p>
+          <p>
+            Students appear as capsules inside a vending machine, runners trapped in giant hamster wheels, or products moving through a packaging line. These environments are not fantastical worlds but recognizable systems that quietly shape behavior, sort individuals, and assign value. Through dreamlike but believable scenarios, the videos transform abstract social structures into tangible visual experiences.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-12">
+      <h2 class="text-4xl pb-4">Visual Metaphors</h2>
+      <div class="visual-metaphors-grid">
+        <div class="visual-metaphor-item">
+          <div class="vm-text">
+            <h4>Capsule Machine</h4>
+            <div class="text-gray-600 leading-relaxed space-y-4">
+              <p>
+                Thousands of students are sealed inside individual transparent capsules, each carrying books, notes, and unfinished assignments. As the capsules tumble inside a giant vending machine, every student continues studying, sleeping, or working without interruption.
+              </p>
+              <p>
+                The machine becomes a metaphor for uncertainty within a highly competitive system. While effort remains constant, outcomes appear increasingly shaped by forces beyond individual control. The work reflects the uneasy relationship between hard work, chance, and selection.
+              </p>
+            </div>
+          </div>
+          <div class="vm-video-wrap">
+            <iframe
+              src="https://player.vimeo.com/video/1197945694?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="capsule_machine"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="visual-metaphor-item">
+          <div class="vm-text">
+            <h4>Hamster Wheel</h4>
+            <div class="text-gray-600 leading-relaxed space-y-4">
+              <p>
+                Inside a vast school gymnasium, countless students run alone within giant hamster wheels. Some sprint desperately, some struggle to keep pace, and others appear exhausted, yet every wheel continues turning.
+              </p>
+              <p>
+                The piece visualizes the experience of continuous competition and self-discipline. Although everyone is moving forward, each wheel operates at a different speed, suggesting unequal conditions hidden beneath the appearance of a shared race.
+              </p>
+            </div>
+          </div>
+          <div class="vm-video-wrap">
+            <iframe
+              src="https://player.vimeo.com/video/1197945695?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="hamster_wheel"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="visual-metaphor-item">
+          <div class="vm-text">
+            <h4>Packaging Line</h4>
+            <div class="text-gray-600 leading-relaxed space-y-4">
+              <p>
+                Students are vacuum-sealed alongside textbooks and study materials, moving slowly through a pristine automated packaging facility. Conveyor belts guide them toward a massive industrial mixing drum where thousands of packaged students accumulate and rotate together.
+              </p>
+              <p>
+                Borrowing the visual language of logistics and manufacturing, the video imagines education as a process of standardization, classification, and mass production. Individual identities remain visible, yet increasingly become part of a larger system designed to organize, evaluate, and process human potential.
+              </p>
+            </div>
+          </div>
+          <div class="vm-video-wrap">
+            <iframe
+              src="https://player.vimeo.com/video/1197909695?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              title="conveyor belts"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-gray-200 py-16 text-center text-gray-400 text-sm">
+    <p>&copy; 2026 Yehua Ou.</p>
+  </footer>
+  </div>
+</body>
+</html>

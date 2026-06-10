@@ -191,7 +191,7 @@ a {
 
 .intro-cta {
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-size: clamp(1.6rem, min(4vw, 7.11vh), 2.4rem);
     font-weight: 600;
     margin: 0;
     line-height: 1.2;
@@ -215,7 +215,7 @@ a {
 
 .intro-make-things {
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 4.5vw, 4rem);
+    font-size: clamp(1.6rem, min(4.5vw, 8vh), 4rem);
     font-weight: 600;
     margin: 0 0 6px 0;
     line-height: 1.05;
@@ -225,7 +225,7 @@ a {
 
 .intro-sub-text {
     font-family: var(--font-display);
-    font-size: clamp(3.2rem, 9vw, 8rem);
+    font-size: clamp(3.2rem, min(9vw, 16vh), 8rem);
     font-weight: 600;
     margin: 0;
     line-height: 1.05;
@@ -238,7 +238,7 @@ a {
     margin: 0;
     padding-bottom: 0;
     font-family: var(--font-display);
-    font-size: clamp(1.25rem, 3.2vw, 1.95rem);
+    font-size: clamp(1.25rem, min(3.2vw, 5.69vh), 1.95rem);
     font-weight: 600;
     line-height: 1.3;
     color: var(--color-text);
@@ -672,16 +672,6 @@ body.is-transitioning .nav-link-main::after {
     color: #111;
 }
 
-/* ===== 暂时隐藏 UI/UX（恢复时删除本段） ===== */
-a.nav-link-intro[href*="uiux.html"],
-a.nav-link-main[href*="uiux.html"] {
-    display: none !important;
-}
-body.uiux-temporarily-hidden .subpage-title-banner,
-body.uiux-temporarily-hidden main {
-    display: none !important;
-}
-
 /* ===== 二级分页 (Games / UI/UX / Digital Art / About) ===== */
 body.subpage {
     background: var(--color-bg-second);
@@ -970,6 +960,8 @@ body.subpage {
 
 .motion-line {
     display: block;
+    /* 保持三行结构，配合 JS 缩字适配窗口宽度 */
+    white-space: nowrap;
     text-align: center;
 }
 
@@ -1022,9 +1014,10 @@ body.subpage {
     line-height: 1.8;
 }
 
-/* 首页 About 段：与 “About Me” 标题字号、字重一致 */
+/* 首页 About 段：与 “About Me” 标题字号、字重一致；
+   窗口 <1180px 时按宽度等比缩字，保持约三行显示 */
 .main-content #about .about-text {
-    font-size: 3rem;
+    font-size: min(4.07vw, 3rem);
     font-weight: 600;
     line-height: 1.3;
 }
@@ -1205,8 +1198,8 @@ body.subpage {
     }
     
     .portal-container {
-        width: 105vh;
-        height: 105vh;
+        width: min(105vh, 105vw);
+        height: min(105vh, 105vw);
     }
     
     .nav-intro {
@@ -1256,8 +1249,8 @@ body.subpage {
     }
     
     .portal-container {
-        width: 105vh;
-        height: 105vh;
+        width: min(105vh, 105vw);
+        height: min(105vh, 105vw);
     }
     
     .oval-name {
@@ -1342,7 +1335,7 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
 
 .about-hero {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: clamp(2rem, 6vw, 15rem);
     max-width: 100%;
@@ -1378,7 +1371,6 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
 .about-hero-right {
     flex: 0 0 auto;
     width: 520px;
-    height: 580px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1386,9 +1378,56 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
 
 .about-hero-img {
     width: 100%;
-    height: 100%;
+    height: 536px;
+    flex-shrink: 0;
     background: url('backgroundimg/Me.jpeg') center/cover no-repeat;
     border-radius: 4px;
+}
+
+/* About 桌面端自适应：照片与字号随窗口缩小，段落位置逻辑不变 */
+@media (min-width: 901px) {
+    .about-hero {
+        --about-photo-width: min(520px, max(300px, 36vw));
+    }
+
+    .about-hero-left {
+        display: flex;
+        align-items: center;
+        height: calc(var(--about-photo-width) * 536 / 520 + 2.75rem);
+    }
+
+    .about-hero-right {
+        width: var(--about-photo-width);
+    }
+
+    .about-hero-img {
+        height: calc(var(--about-photo-width) * 536 / 520);
+    }
+
+    .about-hero-intro {
+        font-size: min(2.6rem, clamp(0.8rem, 1.05rem + 1.35vw, 2.6rem), 6.5vh);
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+    .about-hero-intro {
+        font-size: min(2.4rem, clamp(0.75rem, 0.2rem + 1.9vw, 2.4rem), 6vh);
+    }
+}
+
+@media (max-width: 1050px) and (min-width: 901px) {
+    .about-hero-intro {
+        font-size: min(2rem, clamp(0.7rem, 0.1rem + 1.7vw, 2rem), 5.5vh);
+    }
+}
+
+.about-hero-meta {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.75rem;
+    gap: 0.35rem;
+    flex-shrink: 0;
 }
 
 .about-hero-name {
@@ -1396,8 +1435,40 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
     font-size: 1.25rem;
     font-weight: 600;
     color: #333;
-    margin: 0.75rem 0 0;
+    margin: 0;
     padding: 0;
+    align-self: flex-start;
+    text-align: left;
+}
+
+.about-hero-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: flex-end;
+    gap: 0.35rem;
+}
+
+.about-hero-link {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #333;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: opacity 0.2s ease;
+}
+
+.about-hero-link:hover {
+    opacity: 0.55;
+}
+
+.about-hero-link-arrow {
+    display: inline-block;
+    margin-left: 0.15em;
+    font-size: 0.9em;
 }
 
 /* 底部灰色条 */
@@ -1500,15 +1571,36 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
     }
     .about-hero-left {
         max-width: 100%;
+        display: block;
+        height: auto;
     }
+
     .about-hero-right {
         flex: 0 0 auto;
         width: min(520px, 100%);
-        height: min(580px, 70vh);
         align-items: center;
     }
+    .about-hero-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 520 / 536;
+        max-height: min(536px, 70vh);
+    }
+
+    .about-hero-intro {
+        font-size: min(1.75rem, clamp(0.85rem, 0.5rem + 3.8vw, 1.75rem));
+    }
+
+    .about-hero-meta {
+        width: min(520px, 100%);
+    }
     .about-hero-name {
-        text-align: center;
+        align-self: flex-start;
+        text-align: left;
+    }
+    .about-hero-links {
+        align-self: flex-end;
+        align-items: flex-end;
     }
 }
 
@@ -1529,4 +1621,384 @@ html:has(body.subpage)::-webkit-scrollbar-thumb:hover {
 ::selection {
     background: var(--color-text);
     color: var(--color-bg);
+}
+
+/* ===== 顶部导航 difference 混合模式（同 p5.js blendMode(DIFFERENCE)）===== */
+/* 整个导航以 difference 与下方内容混合：白色文字会随背景自动反色 */
+.nav-main,
+.nav-intro {
+    mix-blend-mode: difference;
+}
+
+/* 第一页文字统一为白色 */
+.intro-headline,
+.intro-cta,
+.intro-tagline,
+.intro-make-things,
+.intro-sub-text,
+.scroll-down-intro .scroll-text,
+.scroll-down-intro .scroll-arrows svg {
+    color: #ffffff;
+}
+
+.intro-divider {
+    background-color: color-mix(in srgb, #ffffff 60%, transparent);
+}
+
+/* 第二页草地底部的 Scroll Down 提示：与草地上的文字同色 */
+.scroll-down-cover {
+    z-index: 5;
+}
+
+.scroll-down-cover .scroll-text,
+.scroll-down-cover .scroll-arrows svg {
+    color: #0f2e16;
+}
+
+/* ===== 第二页/分页顶部导航自适应 =====
+   以 1440 宽为基准：更宽的窗口取原始固定值，
+   更窄时字号、间距、内边距随窗口等比缩小，左中右三组互不重叠 */
+.nav-main {
+    padding: min(30px, 2.08vw) min(40px, 2.78vw);
+}
+
+.nav-main-left {
+    gap: min(30px, 2.08vw);
+}
+
+.nav-link-main {
+    font-size: max(0.6rem, min(1.11vw, 1rem));
+}
+
+.nav-main-center {
+    font-size: max(1rem, min(1.94vw, 1.75rem));
+    padding: 0.5rem min(1rem, 1.39vw);
+}
+
+.nav-main-name-link {
+    font-size: max(1rem, min(1.94vw, 1.75rem));
+}
+
+/* ===== 首页等比自适应（桌面端） =====
+   以 1440x810 为基准窗口：
+   - 窗口 ≥ 基准：取 rem 上限，与原始设计完全一致；
+   - 窗口更窄：按 vw 等比缩小（不设下限，文字不会换行或被圆球遮挡）；
+   - 窗口更矮：按 vh 等比缩小。
+   发光圆球同步用 min(vh, vw) 约束，与文字保持相同比例。
+   ≤768px 沿用原有移动端单列布局。 */
+@media (min-width: 769px) {
+    .intro-cta {
+        font-size: min(2.667vw, 4.74vh, 2.4rem);
+    }
+
+    .intro-tagline {
+        font-size: min(2.167vw, 3.85vh, 1.95rem);
+    }
+
+    .intro-make-things {
+        font-size: min(4.444vw, 7.9vh, 4rem);
+    }
+
+    .intro-sub-text {
+        font-size: min(8.889vw, 15.8vh, 8rem);
+    }
+
+    .portal-container {
+        width: min(105vh, 59.06vw);
+        height: min(105vh, 59.06vw);
+    }
+}
+
+
+/* 仅首页/第二页使用 difference 白色导航（勿作用于分页面） */
+body.no-scroll .nav-link-intro,
+.main-content .nav-main .nav-link-main,
+.main-content .nav-main .nav-main-center,
+.main-content .nav-main .nav-main-name,
+.main-content .nav-main .nav-main-name-link {
+    color: #fff !important;
+}
+
+.main-content .nav-main .nav-link-main::after {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.main-content .nav-main .nav-link-main {
+    transition: color 0.2s ease, opacity 0.3s ease;
+}
+
+.main-content .nav-main .nav-link-main:hover {
+    color: #808080 !important;
+    opacity: 1;
+}
+
+.main-content .nav-main .nav-link-main:hover::after {
+    background-color: currentColor !important;
+}
+
+/* 分页面：黑色导航，与线上一致 */
+body.subpage .nav-main {
+    mix-blend-mode: normal;
+}
+
+body.subpage .nav-main .nav-link-main,
+body.subpage .nav-main .nav-main-name-link {
+    color: #111 !important;
+}
+
+body.subpage .nav-main .nav-link-main::after {
+    background-color: color-mix(in srgb, #111 40%, transparent) !important;
+}
+
+body.subpage .nav-main .nav-link-main {
+    transition: color 0.2s ease, opacity 0.3s ease;
+}
+
+body.subpage .nav-main .nav-link-main:hover {
+    color: #111 !important;
+    opacity: 0.9;
+}
+
+body.subpage .nav-main .nav-link-main:hover::after {
+    background-color: #111 !important;
+}
+
+/* ===== 第一页导航自适应（与 nav-main 同比例）===== */
+.nav-intro {
+    top: min(30px, 2.08vw);
+    left: min(40px, 2.78vw);
+    right: min(40px, 2.78vw);
+}
+
+.nav-left {
+    gap: min(30px, 2.08vw);
+}
+
+.nav-link-intro {
+    font-size: max(0.6rem, min(1.11vw, 1rem));
+}
+
+/* ===== 分页面自适应 ===== */
+@media (max-width: 1024px) {
+    .digital-art-content .subpage-list {
+        padding-left: clamp(1.5rem, 5vw, 3rem);
+        padding-right: clamp(1.5rem, 5vw, 3rem);
+    }
+
+    .subpage-title-banner {
+        padding: 8vh clamp(1.25rem, 5vw, 6vw) 8vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .subpage-title-banner {
+        min-height: auto;
+        padding: 10vh clamp(1rem, 5vw, 2rem) 6vh;
+    }
+
+    .subpage-title-banner-with-gallery {
+        padding-bottom: 2vh;
+    }
+
+    .subpage-headline {
+        white-space: normal;
+        letter-spacing: 0.05em;
+        line-height: 0.92;
+    }
+
+    .subpage-content {
+        padding: 80px clamp(1rem, 5vw, 2rem) 3rem;
+    }
+
+    .digital-art-content {
+        padding-top: 2vh;
+    }
+
+    .digital-art-content .subpage-list {
+        padding-left: clamp(1rem, 5vw, 1.5rem);
+        padding-right: clamp(1rem, 5vw, 1.5rem);
+    }
+
+    .digital-art-row {
+        gap: 2.5rem;
+    }
+
+    .digital-art-title {
+        font-size: clamp(0.95rem, 3.5vw, 1.125rem);
+    }
+
+    .digital-art-desc {
+        font-size: clamp(0.88rem, 3.2vw, 1rem);
+    }
+
+    .above-footer {
+        padding-left: clamp(1rem, 5vw, 2rem);
+        padding-right: clamp(1rem, 5vw, 2rem);
+        min-height: 20vh;
+    }
+
+    .back-to-top {
+        font-size: clamp(0.8rem, 3vw, 0.9rem);
+    }
+}
+
+/* ===== 项目介绍页通用自适应 ===== */
+@media (min-width: 769px) {
+    body.project-page .hero-title {
+        font-size: min(clamp(2.5rem, 6vw + 2rem, 11rem), 18vh) !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    body.project-page main.max-w-7xl,
+    body.project-page main.w-full {
+        padding-left: clamp(1.25rem, 4vw, 2rem) !important;
+        padding-right: clamp(1.25rem, 4vw, 2rem) !important;
+    }
+
+    body.project-page .text-4xl {
+        font-size: clamp(1.75rem, 5vw, 2.25rem) !important;
+    }
+
+    body.project-page .text-3xl {
+        font-size: clamp(1.5rem, 4.5vw, 1.875rem) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    body.project-page .sticky {
+        position: static !important;
+        top: auto !important;
+    }
+
+    body.project-page main {
+        padding-top: 5rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    body.project-page main.pt-64,
+    body.project-page main[class*="pt-"] {
+        padding-top: 6.5rem !important;
+    }
+
+    body.project-page .py-24 {
+        padding-top: 3.5rem !important;
+        padding-bottom: 3.5rem !important;
+    }
+
+    body.project-page .space-y-20 > * + * {
+        margin-top: 3rem !important;
+    }
+
+    body.project-page .space-y-16 > * + * {
+        margin-top: 2.5rem !important;
+    }
+
+    body.project-page .hero-title {
+        font-size: clamp(2rem, 11vw, 5.5rem) !important;
+        margin-bottom: 1.5rem !important;
+        white-space: normal;
+        line-height: 0.95;
+    }
+
+    body.project-page .hero-subtitle {
+        font-size: clamp(0.9rem, 3.5vw, 1.25rem) !important;
+        line-height: 1.45 !important;
+        max-width: 92vw;
+    }
+
+    body.project-page .hero-inner {
+        width: 94% !important;
+        padding: 0 0.75rem !important;
+    }
+
+    body.project-page .project-intro-prose,
+    body.project-page .project-intro-prose p,
+    body.project-page main p.text-gray-600,
+    body.project-page main div.text-gray-600 p {
+        font-size: clamp(1rem, 3.8vw, 1.25rem) !important;
+    }
+
+    body.project-page .project-quote-inner {
+        padding: 0 clamp(1rem, 4vw, 1.5rem);
+    }
+
+    body.project-page .project-quote-line1 {
+        font-size: clamp(1rem, 3.5vw, 1.375rem);
+    }
+
+    body.project-page .project-quote-line2,
+    body.project-page .project-quote-line3 {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+
+    body.project-page .p5-frame,
+    body.project-page .p5-wrap {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    body.project-page .p5-embed,
+    body.project-page iframe {
+        max-width: 100%;
+    }
+
+    body.project-page .p5-embed-wrap {
+        width: 100% !important;
+        max-width: min(600px, 100%) !important;
+    }
+
+    .gallery-card-index {
+        font-size: clamp(0.65rem, 2.5vw, 0.75rem) !important;
+    }
+
+    .gallery-card-title {
+        font-size: clamp(0.85rem, 3.5vw, 1.125rem) !important;
+        letter-spacing: 0.08em !important;
+    }
+
+    .gallery-card-category {
+        font-size: clamp(0.75rem, 3vw, 1rem) !important;
+    }
+
+    .gallery-card-caption {
+        padding-left: clamp(0.75rem, 3vw, 1rem) !important;
+        padding-right: clamp(0.75rem, 3vw, 1rem) !important;
+        margin-top: clamp(0.5rem, 2vw, 0.75rem) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body.project-page .hero-title {
+        font-size: clamp(1.75rem, 10vw, 4rem) !important;
+    }
+
+    body.project-page .text-xl {
+        font-size: clamp(1rem, 4vw, 1.25rem) !important;
+    }
+}
+
+/* ===== About 页补充自适应 ===== */
+@media (max-width: 768px) {
+    .about-main {
+        padding-top: 80px;
+    }
+
+    .about-scroll-inner {
+        font-size: clamp(1.75rem, 7vw, 2.75rem);
+    }
+
+    .about-tag {
+        font-size: clamp(0.95rem, 3.5vw, 1.35rem);
+        padding: 0.55rem 1rem;
+    }
+
+    .about-falling-wrap {
+        padding: 0 clamp(0.75rem, 4vw, 1.5rem);
+        min-height: 320px;
+    }
+
+    .about-falling-tags {
+        height: 320px;
+    }
 }

@@ -11,8 +11,10 @@
 
   var tags = [
     'Figma',
+    'Figma Make',
     'TouchDesigner',
     'p5.js',
+    'ml5.js',
     'Unity',
     'Webflow',
     'HTML',
@@ -21,13 +23,23 @@
     'Blender',
     'Ableton',
     'Adobe Creative Suite',
+    'Procreate',
     'Claude Code',
     'Lovable',
     'Codex',
     'AI Studio',
     'Midjourney',
     'Cursor',
-    'Gemini'
+    'Gemini',
+    'chatGPT',
+    'Suno',
+    'Kling',
+    'Seedance',
+    'libTV',
+    'Madmapper',
+    'C#',
+    'Civitai',
+    'Comfy'
   ];
   var gravity = 0.81;
   var dropHeight = 400;
@@ -99,7 +111,7 @@
     container.classList.add('is-ceiling');
     var cw = container.offsetWidth || wrap.offsetWidth;
     var margin = 20;
-    var count = Math.min(26, Math.max(tags.length, 20));
+    var count = Math.min(30, Math.max(tags.length, 20));
     for (var i = 0; i < count; i++) {
       var el = createTagEl(tags[i % tags.length]);
       container.appendChild(el);
@@ -323,5 +335,81 @@
     document.addEventListener('DOMContentLoaded', setupCeiling);
   } else {
     setupCeiling();
+  }
+})();
+
+/**
+ * About 自我介绍：宽屏保持现有排版；窗口缩小时若段落高度超过照片，自动缩小字号。
+ */
+(function () {
+  if (!document.body.classList.contains('about-page')) return;
+
+  var intro = document.querySelector('.about-hero-intro');
+  var photo = document.querySelector('.about-hero-img');
+  var heroLeft = document.querySelector('.about-hero-left');
+  if (!intro || !photo) return;
+
+  var MIN_DESKTOP = 901;
+  var MIN_PX = 10;
+  var ticking = false;
+
+  function fitIntro() {
+    ticking = false;
+    intro.style.fontSize = '';
+
+    if (window.innerWidth < MIN_DESKTOP) return;
+
+    var maxHeight = photo.offsetHeight;
+    if (maxHeight < 32) return;
+
+    var cssSize = parseFloat(window.getComputedStyle(intro).fontSize);
+    if (intro.scrollHeight <= maxHeight + 1) return;
+
+    var lo = MIN_PX;
+    var hi = cssSize;
+    var best = MIN_PX;
+
+    while (lo <= hi) {
+      var mid = (lo + hi) / 2;
+      intro.style.fontSize = mid + 'px';
+      if (intro.scrollHeight <= maxHeight + 1) {
+        best = mid;
+        lo = mid + 0.1;
+      } else {
+        hi = mid - 0.1;
+      }
+    }
+
+    intro.style.fontSize = best + 'px';
+  }
+
+  function scheduleFit() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(fitIntro);
+  }
+
+  if (typeof ResizeObserver !== 'undefined') {
+    var ro = new ResizeObserver(scheduleFit);
+    ro.observe(photo);
+    if (heroLeft) ro.observe(heroLeft);
+    ro.observe(intro);
+  }
+
+  window.addEventListener('resize', scheduleFit, { passive: true });
+  window.addEventListener('orientationchange', scheduleFit);
+
+  function initFit() {
+    scheduleFit();
+    setTimeout(scheduleFit, 120);
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(initFit);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFit);
+  } else {
+    initFit();
   }
 })();

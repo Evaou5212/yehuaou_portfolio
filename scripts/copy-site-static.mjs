@@ -28,7 +28,7 @@ if (!fs.existsSync(outDir)) {
   process.exit(1)
 }
 
-const dirs = ['DIGITAL_ART', 'GAMES', 'backgroundimg', 'texts', 'js']
+const dirs = ['DIGITAL_ART', 'GAMES', 'UIUX', 'backgroundimg', 'texts', 'js']
 for (const name of dirs) {
   const from = resolve(root, name)
   const to = resolve(outDir, name)

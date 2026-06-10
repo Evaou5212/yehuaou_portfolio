@@ -318,20 +318,29 @@ const coverMotionText = document.getElementById('coverMotionText');
 const coverMotionLines = document.querySelectorAll('.cover-motion-text .motion-line');
 
 let coverRevealedLines = 0;
-const COVER_REVEAL_COOLDOWN_MS = 520;
+let coverRevealing = false;
+const COVER_LINE_STAGGER_MS = 380;
 
-function revealNextCoverLine() {
+// 一次滚动逐行错峰展示剩余所有行，减少所需滑动次数
+function revealAllCoverLines() {
     if (!mainContent.classList.contains('visible') || !coverMotionLines.length) return false;
-    if (coverRevealedLines >= coverMotionLines.length) return false;
-    const lineEl = coverMotionLines[coverRevealedLines];
-    const words = lineEl.querySelectorAll('.motion-word');
-    words.forEach((w, i) => { w.style.setProperty('--word-i', String(i)); });
-    lineEl.classList.add('revealed');
-    coverRevealedLines++;
+    if (coverRevealedLines >= coverMotionLines.length || coverRevealing) return false;
+    coverRevealing = true;
+    let delay = 0;
+    for (let idx = coverRevealedLines; idx < coverMotionLines.length; idx++) {
+        const lineEl = coverMotionLines[idx];
+        setTimeout(() => {
+            const words = lineEl.querySelectorAll('.motion-word');
+            words.forEach((w, i) => { w.style.setProperty('--word-i', String(i)); });
+            lineEl.classList.add('revealed');
+        }, delay);
+        delay += COVER_LINE_STAGGER_MS;
+    }
+    coverRevealedLines = coverMotionLines.length;
+    setTimeout(() => { coverRevealing = false; }, delay + 150);
     return true;
 }
 
-let coverRevealCooldownUntil = 0;
 function onSecondPageWheel(e) {
     if (!hasCompleted) return;
     const scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -340,12 +349,10 @@ function onSecondPageWheel(e) {
         e.preventDefault();
         return;
     }
-    // 在顶部且 Cover 未完全展示时：始终拦截向下滚，避免快速滑动时页面先滑下去再跳回
-    if (coverRevealedLines < coverMotionLines.length) {
+    // 在顶部且 Cover 未完全展示时：拦截向下滚并一次性出完所有字；动画期间继续拦截避免页面先滑走
+    if (coverRevealedLines < coverMotionLines.length || coverRevealing) {
         e.preventDefault();
-        if (Date.now() >= coverRevealCooldownUntil && revealNextCoverLine()) {
-            coverRevealCooldownUntil = Date.now() + COVER_REVEAL_COOLDOWN_MS;
-        }
+        revealAllCoverLines();
     }
 }
 
@@ -361,10 +368,8 @@ function onSecondPageTouchMove(e) {
     const y = e.touches[0].clientY;
     const dy = coverTouchStartY - y;
     coverTouchStartY = y;
-    if (coverRevealedLines < coverMotionLines.length) {
-        if (dy > 20 && Date.now() >= coverRevealCooldownUntil && revealNextCoverLine()) {
-            coverRevealCooldownUntil = Date.now() + COVER_REVEAL_COOLDOWN_MS;
-        }
+    if (coverRevealedLines < coverMotionLines.length || coverRevealing) {
+        if (dy > 20) revealAllCoverLines();
         if (dy > 0) e.preventDefault();
     } else if (dy < -5) {
         e.preventDefault();
@@ -378,7 +383,7 @@ window.addEventListener('touchmove', onSecondPageTouchMove, { passive: false });
 const coverObserver = new MutationObserver(() => {
     if (mainContent.classList.contains('visible')) {
         coverRevealedLines = 0;
-        coverRevealCooldownUntil = 0;
+        coverRevealing = false;
         coverMotionLines.forEach(line => line.classList.remove('revealed'));
     }
 });

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dingdong Maicai — Homepage Redesign | Yehua Ou</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles.css">
+  <!-- Inter 仅用于 Design System 字体规范展示 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    #page-scroll-wrap {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: auto;
+      overscroll-behavior-y: contain;
+    }
+    #page-scroll-wrap::-webkit-scrollbar { display: block; width: 10px; }
+    #page-scroll-wrap::-webkit-scrollbar-track { background: rgba(48, 118, 30, 0.06); }
+    #page-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(48, 118, 30, 0.28); border-radius: 5px; }
+    @supports (scrollbar-width: thin) {
+      #page-scroll-wrap { scrollbar-width: thin; scrollbar-color: rgba(48, 118, 30, 0.28) rgba(48, 118, 30, 0.06); }
+    }
+    body.project-page { overflow-x: visible !important; background: #F7FFEA; }
+    .project-page { font-family: var(--font-body); color: #1a1a1a; }
+    .project-page h1, .project-page h2, .project-page h3, .project-page h4 { font-family: var(--font-display); }
+
+    .project-page .hero-inner {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 90%; max-width: 64rem; padding: 0 1.5rem; box-sizing: border-box;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    @keyframes hero-enter {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .project-page .hero-title {
+      white-space: nowrap; font-weight: 600; text-align: center;
+      margin: 0 0 2.75rem 0 !important; padding: 0 !important;
+      opacity: 0; animation: hero-enter 0.9s ease-out forwards;
+      font-size: clamp(2.5rem, 6vw + 2rem, 11rem);
+    }
+    .project-page .hero-subtitle {
+      text-align: center; margin: 0 !important; padding: 0 !important;
+      opacity: 0; animation: hero-enter 0.7s ease-out 0.25s forwards;
+    }
+
+    .dd-main {
+      background: #F7FFEA;
+      position: relative;
+    }
+    .dd-content {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 6rem 1.5rem;
+      box-sizing: border-box;
+    }
+    .dd-body-wrap { position: relative; }
+
+    /* 目录：平板/桌面为左侧纵向粘性导航；手机为顶部横向滚动条 */
+    .dd-sidebar {
+      display: block;
+      position: sticky;
+      top: 72px;
+      z-index: 40;
+      width: 100%;
+      margin: 0 0 1.25rem;
+      padding: 0.5rem 0 0.75rem;
+      background: #F7FFEA;
+      border-bottom: 1px solid rgba(48, 118, 30, 0.12);
+    }
+    .dd-sidebar-sticky { position: static; }
+    .dd-sidebar-title { display: none; }
+    .dd-toc {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+      padding: 0 0.25rem;
+    }
+    .dd-toc::-webkit-scrollbar { display: none; }
+    .dd-toc::before { display: none; }
+    .dd-toc li {
+      padding-left: 0;
+      margin-bottom: 0;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    .dd-toc li::before { display: none; }
+    .dd-toc a { white-space: nowrap; }
+
+    @media (min-width: 768px) {
+      .dd-body-wrap {
+        display: grid;
+        grid-template-columns: minmax(7.5rem, 10rem) minmax(0, 1fr);
+        column-gap: clamp(1rem, 2.5vw, 2rem);
+        align-items: start;
+      }
+      .dd-sidebar {
+        grid-column: 1;
+        grid-row: 1;
+        position: sticky;
+        top: 90px;
+        width: auto;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        border-bottom: none;
+        z-index: 10;
+      }
+      .dd-sidebar-sticky {
+        position: sticky;
+        top: 90px;
+      }
+      .dd-sidebar-title {
+        display: block;
+        font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+      }
+      .dd-toc {
+        display: block;
+        overflow-x: visible;
+        padding: 0;
+      }
+      .dd-toc::before { display: block; }
+      .dd-toc li {
+        padding-left: 1.5rem;
+        margin-bottom: 0.85rem;
+        margin-right: 0;
+      }
+      .dd-toc li::before { display: block; }
+      .dd-toc a { white-space: normal; }
+      .dd-sections {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+      }
+    }
+    .dd-sidebar-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 1.75rem;
+      line-height: 1.35;
+    }
+    .dd-toc { list-style: none; margin: 0; padding: 0; position: relative; }
+    .dd-toc::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: #d1d5db;
+    }
+    .dd-toc li { position: relative; padding-left: 1.5rem; margin-bottom: 0.85rem; }
+    .dd-toc li::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 0.45em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #d1d5db;
+      transition: background 0.2s;
+    }
+    .dd-toc a {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.2s;
+      line-height: 1.45;
+    }
+    .dd-toc a:hover, .dd-toc a.is-active { color: #111; }
+    .dd-toc a.is-active + li::before,
+    .dd-toc li:has(a.is-active)::before { background: #111; }
+
+    .dd-sections > section { margin-bottom: 8rem; scroll-margin-top: 110px; }
+    .dd-sections > section:last-child { margin-bottom: 0; }
+    .dd-accent-bar { background: linear-gradient(90deg, #30761E, #0E932E); height: 3px; border-radius: 2px; }
+    .dd-insight-list { list-style: none; padding: 0; margin: 0; }
+    .dd-insight-list li { padding-left: 1.25rem; position: relative; margin-bottom: 0.85rem; font-size: 1.25rem; line-height: 1.7; color: #5B5B5B; }
+    .dd-insight-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0E932E;
+    }
+    .dd-section-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #30761E;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .dd-heading { color: #1a1a1a; font-weight: 600; line-height: 1.25; }
+    .dd-prose { color: #5B5B5B; line-height: 1.7; font-size: 1.25rem; }
+    .dd-card {
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid rgba(48, 118, 30, 0.12);
+      box-shadow: 0 4px 20px rgba(48, 118, 30, 0.05);
+    }
+    .dd-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (min-width: 900px) { .dd-problem-grid--six { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .dd-problem-grid { grid-template-columns: 1fr; } }
+    .dd-problem-card { padding: 1.5rem; }
+    .dd-problem-card h3 { font-size: 1.3rem; font-weight: 600; margin: 0 0 0.5rem; }
+    .dd-problem-card p { font-size: 1.25rem; color: #5B5B5B; margin: 0; line-height: 1.7; }
+
+    .dd-principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    @media (max-width: 640px) { .dd-principle-grid { grid-template-columns: 1fr; } }
+    .dd-principle {
+      padding: 1rem 1.15rem;
+      border-left: 3px solid #0E932E;
+      background: rgba(255,255,255,0.65);
+      border-radius: 0 0.6rem 0.6rem 0;
+    }
+    .dd-principle h3 { font-weight: 600; font-size: 1.3rem; color: #30761E; margin: 0 0 0.35rem; }
+    .dd-principle p { font-size: 1.25rem; color: #5B5B5B; margin: 0; line-height: 1.7; }
+
+    .dd-journey-table-wrap {
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid rgba(48, 118, 30, 0.12);
+      box-shadow: 0 4px 20px rgba(48, 118, 30, 0.05);
+      overflow-x: auto;
+    }
+    .dd-journey-table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .dd-journey-table th,
+    .dd-journey-table td {
+      padding: 0.9rem 1.1rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(48, 118, 30, 0.1);
+    }
+    .dd-journey-table tr:last-child th,
+    .dd-journey-table tr:last-child td { border-bottom: none; }
+    .dd-journey-table thead th {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: #30761E;
+      background: rgba(48, 118, 30, 0.06);
+      border-bottom: 2px solid rgba(48, 118, 30, 0.2);
+      white-space: nowrap;
+    }
+    .dd-journey-table tbody th {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #333;
+      white-space: nowrap;
+      background: rgba(48, 118, 30, 0.03);
+    }
+    .dd-journey-table td { color: #5B5B5B; }
+    .dd-journey-table .j-emoji { font-size: 1.25rem; }
+    .dd-journey-table .j-pain { color: #c41e1e; }
+    .dd-journey-table .j-opp { color: #0E932E; font-weight: 500; }
+
+    .dd-decision { margin-bottom: 4rem; }
+    .dd-decision:last-child { margin-bottom: 0; }
+
+    .dd-color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.65rem; }
+    .dd-color-swatch { width: 100%; aspect-ratio: 1; border-radius: 0.6rem; border: 1px solid rgba(0,0,0,0.06); }
+    .dd-color-label { font-size: 0.7rem; color: #5B5B5B; margin-top: 0.25rem; font-family: var(--font-body); }
+    .dd-style-chip {
+      display: inline-block;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #30761E;
+      background: rgba(48, 118, 30, 0.1);
+      border: 1px solid rgba(48, 118, 30, 0.2);
+      padding: 0.5rem 1.25rem;
+      border-radius: 999px;
+    }
+
+    .dd-revision-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 768px) { .dd-revision-grid { grid-template-columns: 1fr; } }
+
+    .dd-placeholder {
+      border: 2px dashed rgba(48, 118, 30, 0.3);
+      border-radius: 0.85rem;
+      background: rgba(255,255,255,0.45);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .dd-placeholder strong {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #30761E;
+      margin-bottom: 0.35rem;
+    }
+    .dd-placeholder p { font-size: 0.82rem; color: #5B5B5B; margin: 0; }
+
+    .dd-figure {
+      width: 100%;
+    }
+    .dd-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .project-intro-prose, .project-intro-prose p { font-size: 1.25rem; line-height: 1.7; }
+
+    @media (max-width: 1024px) {
+      .dd-content { padding: 5rem clamp(1rem, 4vw, 1.5rem); }
+      .dd-sections > section { margin-bottom: 6rem; }
+    }
+
+    @media (max-width: 768px) {
+      .dd-content { padding: 4.5rem 1rem; }
+      .dd-sections > section { margin-bottom: 5rem; scroll-margin-top: 90px; }
+      .dd-heading.text-3xl { font-size: clamp(1.5rem, 6vw, 1.875rem) !important; }
+      .dd-heading.text-2xl { font-size: clamp(1.35rem, 5vw, 1.5rem) !important; }
+      .dd-prose { font-size: clamp(1rem, 3.8vw, 1.25rem) !important; }
+      .dd-insight-list li { font-size: clamp(1rem, 3.8vw, 1.25rem) !important; }
+      .dd-problem-card h3 { font-size: clamp(1.1rem, 4vw, 1.3rem); }
+      .dd-problem-card p { font-size: clamp(1rem, 3.8vw, 1.25rem) !important; }
+      .dd-principle h3 { font-size: clamp(1.1rem, 4vw, 1.3rem); }
+      .dd-principle p { font-size: clamp(1rem, 3.8vw, 1.25rem) !important; }
+      .dd-journey-table { min-width: 560px; font-size: 0.82rem; }
+      .dd-color-grid { grid-template-columns: repeat(3, 1fr); }
+      #overview .md\:col-span-4 { position: static !important; }
+    }
+
+    @media (max-width: 480px) {
+      .dd-content { padding: 4rem 0.85rem; }
+      .dd-style-chip { font-size: 0.9rem; padding: 0.4rem 0.9rem; }
+      .dd-color-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body class="project-page min-h-screen">
+  <div id="page-scroll-wrap">
+  <nav class="nav-main nav-main-subpage">
+    <div class="nav-main-left">
+      <a href="../../games.html" class="nav-link-main">Games</a>
+      <a href="../../uiux.html" class="nav-link-main">UI/UX</a>
+      <a href="../../digital-art.html" class="nav-link-main">Digital Art</a>
+    </div>
+    <div class="nav-main-center">
+      <a href="../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+    </div>
+    <div class="nav-main-right">
+      <a href="../../about.html" class="nav-link-main">About</a>
+    </div>
+  </nav>
+
+  <header class="relative h-screen overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="cover.png" alt="Dingdong Maicai redesigned homepage" class="w-full h-full object-cover object-top" />
+      <div class="absolute inset-0 bg-black/35"></div>
+    </div>
+    <div class="hero-inner relative z-10 text-white">
+      <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tight">
+        Dingdong Maicai
+      </h1>
+      <p class="hero-subtitle text-xl md:text-2xl font-light opacity-90 leading-relaxed">
+        An end-to-end homepage redesign for China's leading fresh grocery platform.
+      </p>
+    </div>
+  </header>
+
+  <div class="dd-main">
+    <div class="dd-content">
+      <div class="dd-body-wrap">
+        <aside class="dd-sidebar" aria-label="Page sections">
+          <div class="dd-sidebar-sticky">
+            <p class="dd-sidebar-title">Dingdong Maicai</p>
+            <ul class="dd-toc" id="ddToc">
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#positioning">Brand Positioning</a></li>
+              <li><a href="#research">User Research</a></li>
+              <li><a href="#competitive">Competitive Analysis</a></li>
+              <li><a href="#problems">Core Problems</a></li>
+              <li><a href="#challenge">Design Challenge</a></li>
+              <li><a href="#principles">Design Principles</a></li>
+              <li><a href="#decision-01">Design Decision 01</a></li>
+              <li><a href="#decision-02">Design Decision 02</a></li>
+              <li><a href="#revisions">Page Revisions</a></li>
+              <li><a href="#system">Design System</a></li>
+              <li><a href="#next-steps">Next Steps</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="dd-sections">
+        <section id="overview" class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-10">
+          <div class="md:col-span-4 space-y-8 md:sticky md:top-32">
+            <div class="space-y-2">
+              <h3 class="text-xs uppercase tracking-widest text-gray-400">Project Type</h3>
+              <p class="text-xl font-medium">Mobile App UI/UX Redesign</p>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xs uppercase tracking-widest text-gray-400">Role</h3>
+              <p class="text-xl font-medium">UI/UX Designer</p>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xs uppercase tracking-widest text-gray-400">Skills</h3>
+              <p class="text-xl font-medium">User Research, Design System, Prototyping, Product Thinking</p>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xs uppercase tracking-widest text-gray-400">Tools</h3>
+              <p class="text-xl font-medium">Figma</p>
+            </div>
+          </div>
+          <div class="md:col-span-8 space-y-6">
+            <div class="prose dd-prose project-intro-prose">
+              <p>As Dingdong Maicai scaled, its homepage grew increasingly crowded: stacked promotions, fragmented category entries, and undersized product cards made everyday grocery shopping slower than it should be. This project is a structured redesign of the homepage and the Healthy Eating channel, moving from brand positioning analysis, user research, and competitive benchmarking, through information architecture and interaction refinement, to a cohesive visual system.</p>
+              <p>The goal was not to strip away business content, but to reorganize it so users could discover products faster while promotional surfaces remained effective. Every change traces back to a documented problem, and the final screens rebuild the page around fewer, clearer entry points and one unified card system.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="positioning" class="space-y-6">
+          <p class="dd-section-label">Brand Positioning</p>
+          <p class="dd-prose"><strong>Dingdong Maicai (叮咚买菜)</strong> is a self-operated fresh grocery delivery app specializing in produce, meat, seafood, and daily essentials. It operates as a vertically integrated retailer, sourcing, warehousing, and delivering perishables within 30 minutes in major Chinese cities. Its core value proposition centers on <em>freshness guarantee</em>, <em>reliable delivery windows</em>, and <em>curated daily essentials</em>.</p>
+        </section>
+
+        <section id="research">
+          <p class="dd-section-label">User Research</p>
+          <h2 class="dd-heading text-2xl md:text-3xl mb-5">Three core user groups</h2>
+          <div class="dd-figure mb-8">
+            <img src="Persona.jpg" alt="Three user personas: Young Professional, Homemaker, and Retiree" />
+          </div>
+
+          <h3 class="font-semibold text-lg mb-3">User Journey · Ms. Li · Young professional · After-work grocery run</h3>
+          <div class="dd-journey-table-wrap">
+            <table class="dd-journey-table">
+              <thead>
+                <tr>
+                  <th scope="col">Stage</th>
+                  <th scope="col">Open App</th>
+                  <th scope="col">Browse Homepage</th>
+                  <th scope="col">Find Ingredients</th>
+                  <th scope="col">View Recommendations</th>
+                  <th scope="col">Add to Cart</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Action</th>
+                  <td>Opens Dingdong Maicai</td>
+                  <td>Scrolls through homepage</td>
+                  <td>Searches for veggies and meat</td>
+                  <td>Checks deals and suggestions</td>
+                  <td>Adds items and checks out</td>
+                </tr>
+                <tr>
+                  <th scope="row">Thought</th>
+                  <td>What should I eat tonight?</td>
+                  <td>So much going on</td>
+                  <td>Where are the vegetables?</td>
+                  <td>Any good discounts?</td>
+                  <td>Hope checkout is quick</td>
+                </tr>
+                <tr>
+                  <th scope="row">Emotion</th>
+                  <td><span class="j-emoji">🙂</span></td>
+                  <td><span class="j-emoji">😐</span></td>
+                  <td><span class="j-emoji">😩</span></td>
+                  <td><span class="j-emoji">😐</span></td>
+                  <td><span class="j-emoji">🙂</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Pain Point</th>
+                  <td>–</td>
+                  <td class="j-pain">Too many ads</td>
+                  <td class="j-pain">Messy categories</td>
+                  <td class="j-pain">Low-value recommendations</td>
+                  <td>–</td>
+                </tr>
+                <tr>
+                  <th scope="row">Opportunity</th>
+                  <td>–</td>
+                  <td class="j-opp">Integrate modules</td>
+                  <td class="j-opp">Optimize categories</td>
+                  <td class="j-opp">Add recipe picks</td>
+                  <td class="j-opp">Shorten the path</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="font-semibold text-lg mb-3 mt-10">Key Findings</h3>
+          <p class="dd-prose mb-4">Across interviews and scenario mapping, three patterns emerged consistently.</p>
+          <ul class="dd-insight-list">
+            <li><strong>Users feel overwhelmed by excessive promotional content.</strong> Flash sale timers, scrolling tickers, and stacked banners created urgency fatigue rather than helpful guidance.</li>
+            <li><strong>Product categories are difficult to scan efficiently.</strong> Twelve categories in a horizontally scrollable grid required high visual effort, especially for users shopping under time pressure.</li>
+            <li><strong>Recipe inspiration is disconnected from grocery shopping behavior.</strong> Users wanted meal ideas tied to purchasable ingredients, but the recipe module lived as a separate entry point with no purchase pathway.</li>
+          </ul>
+        </section>
+
+        <section id="competitive" class="space-y-8">
+          <div>
+            <p class="dd-section-label">Competitive Analysis</p>
+            <h2 class="dd-heading text-3xl md:text-4xl mt-2">Learning from Hema, Pupu, and emerging grocery platforms</h2>
+            <p class="dd-prose mt-4">I benchmarked Dingdong against direct competitors to identify patterns that reduce cognitive load while sustaining promotional effectiveness.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="dd-card p-7 space-y-3">
+              <h3 class="font-semibold">Industry Trends</h3>
+              <ul class="dd-prose space-y-2 list-disc list-inside">
+                <li>Competitors are converging on <strong>green-dominant brand palettes</strong> to signal freshness</li>
+                <li>Top performers use <strong>fewer, larger category entry points</strong> instead of dense icon grids</li>
+                <li>Recipe content is increasingly <strong>embedded within product feeds</strong> rather than siloed</li>
+                <li>Specialty channels use <strong>dedicated landing pages</strong> with unified card systems</li>
+              </ul>
+            </div>
+            <div class="dd-card p-7 space-y-3">
+              <h3 class="font-semibold">Actionable Takeaways for Dingdong</h3>
+              <ul class="dd-prose space-y-2 list-disc list-inside">
+                <li>Remove oversized hero banners that push essential categories below the fold</li>
+                <li>Standardize product card anatomy: image, tags, title, price, CTA</li>
+                <li>Unify homepage and channel page layouts to reduce context-switching cost</li>
+                <li>Use color-coded category channels to improve scan speed without adding modules</li>
+              </ul>
+            </div>
+          </div>
+          <div class="dd-figure">
+            <img src="competitive analysis.jpg" alt="Competitive analysis of Pupu, Hema, and Meituan homepages" />
+          </div>
+        </section>
+
+        <section id="problems" class="space-y-10">
+          <div>
+            <p class="dd-section-label">Core Problems</p>
+            <h2 class="dd-heading text-3xl md:text-4xl mt-2">The existing homepage created friction at every stage of the shopping journey</h2>
+            <p class="dd-prose mt-4">Through heuristic evaluation, competitive analysis, and user scenario mapping, I identified systemic issues across information hierarchy, module consistency, and cross-page navigation.</p>
+          </div>
+          <div class="dd-problem-grid dd-problem-grid--six">
+            <div class="dd-card dd-problem-card">
+              <h3>No clear visual focal point</h3>
+              <p>Promotional banners, category icons, and product cards competed for attention. Images were dense and similarly weighted, making it difficult for users to know where to look first.</p>
+            </div>
+            <div class="dd-card dd-problem-card">
+              <h3>Weak information hierarchy</h3>
+              <p>Primary entry points (categories, flash sales) were undersized while secondary promotions dominated screen real estate. Product cards lacked structured metadata.</p>
+            </div>
+            <div class="dd-card dd-problem-card">
+              <h3>Disconnected content modules</h3>
+              <p>Recipe inspiration, healthy eating channels, and the main product feed operated as isolated silos. Users could browse recipes but had no seamless path to purchase ingredients.</p>
+            </div>
+            <div class="dd-card dd-problem-card">
+              <h3>Inconsistent cross-page patterns</h3>
+              <p>Homepage, category, and specialty channel pages used different card sizes, button styles, and layout grids, eroding brand cohesion.</p>
+            </div>
+            <div class="dd-card dd-problem-card">
+              <h3>Buttons and icons too small</h3>
+              <p>Category icons were too small for comfortable tapping, while add-to-cart buttons on product cards were disproportionately tiny.</p>
+            </div>
+            <div class="dd-card dd-problem-card">
+              <h3>Scattered brand positioning</h3>
+              <p>Promotional messaging, color usage, and module framing varied across sections, weakening Dingdong's identity as a trusted fresh grocery brand.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="challenge" class="text-center">
+          <p class="dd-section-label">Design Challenge</p>
+          <h2 class="dd-heading text-3xl md:text-4xl mt-2">How might we reduce cognitive load on the homepage while maintaining business exposure opportunities?</h2>
+        </section>
+
+        <section id="principles" class="space-y-8">
+          <div>
+            <p class="dd-section-label">Design Principles</p>
+            <h2 class="dd-heading text-3xl md:text-4xl mt-2">Four principles that guided every design decision</h2>
+          </div>
+          <div class="dd-principle-grid">
+            <div class="dd-principle"><h3>Reduce Clutter</h3><p>Eliminate redundant banners and consolidate competing modules. Every element on screen must earn its place.</p></div>
+            <div class="dd-principle"><h3>Increase Discoverability</h3><p>Make high-frequency categories and channels immediately visible without horizontal scrolling or hunting.</p></div>
+            <div class="dd-principle"><h3>Support Decision-Making</h3><p>Structure product cards with clear tags, pricing tiers, and actionable CTAs so users can compare and choose confidently.</p></div>
+            <div class="dd-principle"><h3>Create Emotional Engagement</h3><p>Connect recipe inspiration and healthy living content to the shopping flow, turning utility into a guided experience.</p></div>
+          </div>
+        </section>
+
+        <section id="decision-01" class="dd-decision">
+          <p class="dd-section-label">Design Decision 01</p>
+          <h2 class="dd-heading text-3xl md:text-4xl mt-2 mb-6">Homepage Redesign</h2>
+          <p class="dd-prose mb-6">This decision targets four core problems: <strong>no clear visual focal point</strong>, <strong>weak information hierarchy</strong>, <strong>buttons and icons too small</strong>, and <strong>disconnected content modules</strong>. The homepage was rebuilt around fewer, larger entry points and a unified card system, with recipe inspiration woven directly into the feed.</p>
+          <div class="dd-figure">
+            <img src="decision1.jpg" alt="Homepage redesign before and after with challenges and solutions, including recipe integration" />
+          </div>
+        </section>
+
+        <section id="decision-02" class="dd-decision">
+          <p class="dd-section-label">Design Decision 02</p>
+          <h2 class="dd-heading text-3xl md:text-4xl mt-2 mb-6">Healthy Eating · Light Nutrition Planet</h2>
+          <p class="dd-prose mb-6">This decision answers two core problems: <strong>inconsistent cross-page patterns</strong> and <strong>scattered brand positioning</strong>. The health channel was rebuilt on the same card system as the homepage and given real nutrition content instead of decorative hero images.</p>
+          <div class="dd-figure">
+            <img src="decision2.jpg" alt="Healthy Eating channel before and after with challenges and solutions" />
+          </div>
+        </section>
+
+        <section id="revisions" class="space-y-10">
+          <div>
+            <p class="dd-section-label">Page Revisions</p>
+            <h2 class="dd-heading text-3xl md:text-4xl mt-2">A systematic before-and-after across three revision dimensions</h2>
+          </div>
+          <div class="dd-revision-grid">
+            <div class="dd-card p-7 space-y-3">
+              <span class="text-3xl font-bold text-[#30761E]">01</span>
+              <h3 class="font-semibold text-lg">Information Architecture</h3>
+              <p class="dd-prose">Restructured page hierarchy, modularized content blocks, and established consistent information display patterns across all pages.</p>
+            </div>
+            <div class="dd-card p-7 space-y-3">
+              <span class="text-3xl font-bold text-[#30761E]">02</span>
+              <h3 class="font-semibold text-lg">Interaction Design</h3>
+              <p class="dd-prose">Optimized category navigation, created dedicated channel landing pages, and improved filtering and content selection flows.</p>
+            </div>
+            <div class="dd-card p-7 space-y-3">
+              <span class="text-3xl font-bold text-[#30761E]">03</span>
+              <h3 class="font-semibold text-lg">Visual Design</h3>
+              <p class="dd-prose">Clarified visual pathways, reduced non-essential decorative elements, and strengthened module differentiation to combat visual fatigue.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="system" class="space-y-10">
+          <div>
+            <p class="dd-section-label">Design System</p>
+            <h2 class="dd-heading text-3xl md:text-4xl mt-2">A scalable visual language rooted in freshness and clarity</h2>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="font-semibold text-lg">Style</h3>
+            <p class="dd-prose">Through Dingdong's platform positioning and moodboard exploration, four style keywords anchor the visual direction.</p>
+            <div class="flex flex-wrap gap-3">
+              <span class="dd-style-chip">简洁 · Clean</span>
+              <span class="dd-style-chip">清爽 · Refreshing</span>
+              <span class="dd-style-chip">活力 · Vibrant</span>
+              <span class="dd-style-chip">新鲜 · Fresh</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="space-y-4">
+              <h3 class="font-semibold text-lg">Fonts</h3>
+              <div>
+                <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Chinese · Microsoft YaHei</p>
+                <p style="font-size:1.5rem;font-weight:600;font-family:'Microsoft YaHei','微软雅黑',sans-serif">微软雅黑 · 新鲜送达</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">English · Inter</p>
+                <p style="font-size:1.5rem;font-weight:600;font-family:'Inter',sans-serif">Inter · Fresh Delivery</p>
+              </div>
+              <p class="dd-prose">Chinese copy uses Microsoft YaHei for readability at small sizes. English copy uses Inter, a free commercial typeface that is slender and upright, steady yet fashionable.</p>
+            </div>
+            <div class="space-y-4">
+              <h3 class="font-semibold text-lg">Colors</h3>
+              <p class="dd-prose">The standard palette leads with fresh greens to express the brand tone.</p>
+              <div class="dd-color-grid">
+                <div><div class="dd-color-swatch" style="background:#30761E"></div><p class="dd-color-label">#30761E</p></div>
+                <div><div class="dd-color-swatch" style="background:#0E932E"></div><p class="dd-color-label">#0E932E</p></div>
+                <div><div class="dd-color-swatch" style="background:#F7FFEA"></div><p class="dd-color-label">#F7FFEA</p></div>
+                <div><div class="dd-color-swatch" style="background:#FFA620"></div><p class="dd-color-label">#FFA620</p></div>
+                <div><div class="dd-color-swatch" style="background:#FFD493"></div><p class="dd-color-label">#FFD493</p></div>
+                <div><div class="dd-color-swatch" style="background:#FF0000"></div><p class="dd-color-label">#FF0000</p></div>
+                <div><div class="dd-color-swatch" style="background:#954C17"></div><p class="dd-color-label">#954C17</p></div>
+                <div><div class="dd-color-swatch" style="background:#000000"></div><p class="dd-color-label">#000000</p></div>
+                <div><div class="dd-color-swatch" style="background:#5B5B5B"></div><p class="dd-color-label">#5B5B5B</p></div>
+                <div><div class="dd-color-swatch" style="background:#FFFFFF"></div><p class="dd-color-label">#FFFFFF</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="next-steps" class="space-y-8">
+          <div>
+            <p class="dd-section-label">Next Steps</p>
+            <h2 class="dd-heading text-3xl md:text-4xl mt-2">Opportunities for further exploration</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="dd-card p-7 space-y-3">
+              <h3 class="font-semibold">Usability Testing &amp; Iteration</h3>
+              <p class="dd-prose">Validate the redesigned flows with moderated usability sessions focused on category discovery time, recipe-to-cart completion rate, and perceived cognitive load.</p>
+            </div>
+            <div class="dd-card p-7 space-y-3">
+              <h3 class="font-semibold">Personalization Layer</h3>
+              <p class="dd-prose">Explore adaptive homepage modules that reorder based on time of day, purchase history, and dietary preferences.</p>
+            </div>
+            <div class="dd-card p-7 space-y-3">
+              <h3 class="font-semibold">Design System Documentation</h3>
+              <p class="dd-prose">Expand the component library into a full Figma design system with documented states, spacing tokens, and developer handoff specs.</p>
+            </div>
+            <div class="dd-card p-7 space-y-3">
+              <h3 class="font-semibold">Accessibility Audit</h3>
+              <p class="dd-prose">Conduct WCAG compliance review on color contrast ratios, touch target sizes, and screen reader compatibility across all redesigned modules.</p>
+            </div>
+          </div>
+        </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-[#30761E]/15 py-12 text-center text-[#5B5B5B] text-sm" style="background:#F7FFEA">
+    <p>&copy; 2026 Yehua Ou.</p>
+  </footer>
+  </div>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll('#ddToc a');
+      var sections = [];
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (el) sections.push({ link: a, el: el });
+      });
+      var wrap = document.getElementById('page-scroll-wrap');
+      function onScroll() {
+        var anchor = 150;
+        var current = sections[0];
+        sections.forEach(function (s) {
+          if (s.el.getBoundingClientRect().top <= anchor) current = s;
+        });
+        links.forEach(function (a) { a.classList.remove('is-active'); });
+        if (current) current.link.classList.add('is-active');
+      }
+      (wrap || window).addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
