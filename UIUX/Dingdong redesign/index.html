@@ -56,8 +56,9 @@
       margin: 0 auto;
       padding: 6rem 1.5rem;
       box-sizing: border-box;
+      overflow: visible;
     }
-    .dd-body-wrap { position: relative; }
+    .dd-body-wrap { position: relative; overflow: visible; }
 
     /* 目录：平板/桌面为左侧纵向粘性导航；手机为顶部横向滚动条 */
     .dd-sidebar {
@@ -97,8 +98,8 @@
     @media (min-width: 768px) {
       .dd-body-wrap {
         display: grid;
-        grid-template-columns: minmax(7.5rem, 10rem) minmax(0, 1fr);
-        column-gap: clamp(1rem, 2.5vw, 2rem);
+        grid-template-columns: minmax(7.5rem, 11rem) minmax(0, 1fr);
+        column-gap: clamp(3rem, 8vw, 6.5rem);
         align-items: start;
       }
       .dd-sidebar {
@@ -108,10 +109,13 @@
         top: 90px;
         width: auto;
         margin: 0;
+        margin-left: calc(-1 * clamp(1.25rem, 6vw, 5rem));
         padding: 0;
+        padding-right: clamp(0.5rem, 2vw, 1.25rem);
         background: transparent;
         border-bottom: none;
         z-index: 10;
+        justify-self: start;
       }
       .dd-sidebar-sticky {
         position: sticky;
@@ -138,6 +142,24 @@
         grid-column: 2;
         grid-row: 1;
         min-width: 0;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .dd-body-wrap {
+        display: block;
+      }
+      .dd-sidebar {
+        position: absolute;
+        left: -16.5rem;
+        top: 0;
+        width: 12rem;
+        margin-left: 0;
+        padding-right: 0;
+      }
+      .dd-sidebar-sticky {
+        position: sticky;
+        top: 90px;
       }
     }
     .dd-sidebar-title {
@@ -583,9 +605,9 @@
           </div>
         </section>
 
-        <section id="challenge" class="text-center">
+        <section id="challenge">
           <p class="dd-section-label">Design Challenge</p>
-          <h2 class="dd-heading text-3xl md:text-4xl mt-2">How might we reduce cognitive load on the homepage while maintaining business exposure opportunities?</h2>
+          <h2 class="dd-heading text-3xl md:text-4xl mt-2 text-center">How might we reduce cognitive load on the homepage while maintaining business exposure opportunities?</h2>
         </section>
 
         <section id="principles" class="space-y-8">
