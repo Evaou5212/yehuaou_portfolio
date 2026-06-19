@@ -16,10 +16,11 @@ const projects = [
   { id: 16, title: 'Irasutoya Cooking Game', category: 'Games', description: 'Irasutoya-Style Browser Game', aspectRatio: 'landscape', href: '/GAMES/Irasutoya-Cooking-Game/index.html', image: '/GAMES/Irasutoya-Cooking-Game/cover.png', hideFromHomepage: true },
   { id: 17, title: 'Dingdong Maicai', category: 'UI/UX', description: 'Mobile Grocery App UX Redesign', aspectRatio: 'landscape', href: '/UIUX/Dingdong%20redesign/index.html', image: '/UIUX/Dingdong%20redesign/cover.png' },
   { id: 18, title: 'WakePlan', category: 'UI/UX', description: 'AI-First Wake-Up Product Design', aspectRatio: 'landscape', href: '/UIUX/WakePlan/index.html', image: '/UIUX/WakePlan/cover.jpg' },
+  { id: 19, title: 'Yunnan Baiyao Dental Health', category: 'UI/UX', description: 'Oral Care Brand App Experience Design', aspectRatio: 'landscape', href: '/UIUX/Yunnan/index.html', image: '/UIUX/Yunnan/cover.jpg' },
 ];
 
-// 第二首页展示顺序：UI/UX（Dingdong → WakePlan）→ Algorithmic Garden → Games 前两个 → Digital Art 前四个
-const HOMEPAGE_ORDER = [17, 18, 1, 2, 15, 3, 4, 5];
+// 第二首页展示顺序：UI/UX（Dingdong → WakePlan → Yunnan）→ Algorithmic Garden → Games 前两个 → Digital Art 前四个
+const HOMEPAGE_ORDER = [17, 18, 19, 1, 2, 15, 3, 4, 5];
 
 const CELL_ASPECT_RATIO = 0.75;
 const SUBPAGE_CELL_ASPECT_RATIO = 0.6;

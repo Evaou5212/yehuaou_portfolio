@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yunnan Baiyao Oral Care — Case Study | Yehua Ou</title>
+  <link rel="icon" type="image/png" href="/icon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    #page-scroll-wrap {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: auto;
+      overscroll-behavior-y: contain;
+    }
+    #page-scroll-wrap::-webkit-scrollbar { display: block; width: 10px; }
+    #page-scroll-wrap::-webkit-scrollbar-track { background: rgba(25, 68, 160, 0.07); }
+    #page-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(25, 68, 160, 0.3); border-radius: 5px; }
+    @supports (scrollbar-width: thin) {
+      #page-scroll-wrap { scrollbar-width: thin; scrollbar-color: rgba(25, 68, 160, 0.3) rgba(25, 68, 160, 0.07); }
+    }
+
+    body.project-page { overflow-x: visible !important; background: #fff; }
+    .project-page { font-family: var(--font-body); color: #1a1a1a; }
+    .project-page h1, .project-page h2, .project-page h3, .project-page h4 { font-family: var(--font-display); }
+
+    .project-page .hero-inner {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 90%; max-width: 64rem; padding: 0 1.5rem; box-sizing: border-box;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    @keyframes hero-enter {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .project-page .hero-title {
+      white-space: nowrap; font-weight: 600; text-align: center;
+      margin: 0 0 2rem 0 !important; padding: 0 !important;
+      opacity: 0; animation: hero-enter 0.9s ease-out forwards;
+      font-size: clamp(2rem, 5vw + 1.6rem, 8rem);
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .project-page .hero-subtitle {
+      text-align: center; margin: 0 !important; padding: 0 !important;
+      opacity: 0; animation: hero-enter 0.7s ease-out 0.25s forwards;
+      max-width: 46rem;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .yn-main { background: #fff; position: relative; }
+    .yn-content {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 6rem 1.5rem;
+      box-sizing: border-box;
+      overflow: visible;
+    }
+    .yn-body-wrap { position: relative; overflow: visible; }
+
+    .yn-sidebar {
+      display: block;
+      position: sticky;
+      top: 72px;
+      z-index: 40;
+      width: 100%;
+      margin: 0 0 1.25rem;
+      padding: 0.5rem 0 0.75rem;
+      background: #fff;
+      border-bottom: 1px solid rgba(25, 68, 160, 0.14);
+    }
+    .yn-sidebar-sticky { position: static; }
+    .yn-sidebar-title { display: none; }
+    .yn-toc {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+      padding: 0 0.25rem;
+    }
+    .yn-toc::-webkit-scrollbar { display: none; }
+    .yn-toc::before { display: none; }
+    .yn-toc li {
+      padding-left: 0;
+      margin-bottom: 0;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    .yn-toc li::before { display: none; }
+    .yn-toc a { white-space: nowrap; }
+
+    @media (min-width: 768px) {
+      .yn-body-wrap {
+        display: grid;
+        grid-template-columns: minmax(7.5rem, 11rem) minmax(0, 1fr);
+        column-gap: clamp(3rem, 8vw, 6.5rem);
+        align-items: start;
+      }
+      .yn-sidebar {
+        grid-column: 1;
+        grid-row: 1;
+        position: sticky;
+        top: 90px;
+        width: auto;
+        margin: 0;
+        margin-left: calc(-1 * clamp(1.25rem, 6vw, 5rem));
+        padding: 0;
+        padding-right: clamp(0.5rem, 2vw, 1.25rem);
+        background: transparent;
+        border-bottom: none;
+        z-index: 10;
+        justify-self: start;
+      }
+      .yn-sidebar-sticky { position: sticky; top: 90px; }
+      .yn-sidebar-title { display: block; font-size: clamp(0.82rem, 1.1vw, 0.95rem); }
+      .yn-toc { display: block; overflow-x: visible; padding: 0; }
+      .yn-toc::before { display: block; }
+      .yn-toc li { padding-left: 1.5rem; margin-bottom: 0.85rem; margin-right: 0; }
+      .yn-toc li::before { display: block; }
+      .yn-toc a { white-space: normal; }
+      .yn-sections { grid-column: 2; grid-row: 1; min-width: 0; }
+    }
+
+    @media (min-width: 1280px) {
+      .yn-body-wrap { display: block; }
+      .yn-sidebar {
+        position: absolute;
+        left: -16.5rem;
+        top: 0;
+        bottom: 0;
+        width: 12rem;
+        margin-left: 0;
+        padding-right: 0;
+      }
+      .yn-sidebar-sticky { position: sticky; top: 90px; }
+    }
+
+    .yn-sidebar-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1944A0;
+      margin-bottom: 1.75rem;
+      line-height: 1.35;
+    }
+    .yn-toc { list-style: none; margin: 0; padding: 0; position: relative; }
+    .yn-toc::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: #d1d5db;
+    }
+    .yn-toc li { position: relative; padding-left: 1.5rem; margin-bottom: 0.85rem; }
+    .yn-toc li::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 0.45em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #d1d5db;
+      transition: background 0.2s;
+    }
+    .yn-toc a {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.2s;
+      line-height: 1.45;
+    }
+    .yn-toc a:hover, .yn-toc a.is-active { color: #1944A0; }
+    .yn-toc li:has(a.is-active)::before { background: #1944A0; }
+
+    .yn-sections > section { margin-bottom: 8rem; scroll-margin-top: 110px; }
+    .yn-sections > section:last-child { margin-bottom: 0; }
+    .yn-section-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #1944A0;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .yn-heading { color: #1a1a1a; font-weight: 600; line-height: 1.25; }
+    .yn-prose { color: #3f4f6f; line-height: 1.7; font-size: 1.25rem; }
+    .yn-accent-bar {
+      background: linear-gradient(90deg, #1944A0 0%, #639ADD 100%);
+      height: 3px;
+      border-radius: 2px;
+      width: 160px;
+    }
+    .yn-card {
+      background: #f7fbff;
+      border-radius: 1rem;
+      border: 1px solid rgba(25, 68, 160, 0.12);
+      box-shadow: 0 4px 20px rgba(25, 68, 160, 0.06);
+    }
+    .yn-highlight-list { list-style: none; padding: 0; margin: 0; }
+    .yn-highlight-list li {
+      padding-left: 1.25rem;
+      position: relative;
+      margin-bottom: 0.85rem;
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #3f4f6f;
+    }
+    .yn-highlight-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #639ADD;
+    }
+    .yn-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0.95rem;
+      border: 1px solid rgba(25, 68, 160, 0.1);
+      box-shadow: 0 8px 28px rgba(25, 68, 160, 0.08);
+      background: #fff;
+    }
+    .yn-phone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .yn-system-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .yn-color-palette {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .yn-color-chip {
+      border-radius: 0.9rem;
+      overflow: hidden;
+      border: 1px solid rgba(25, 68, 160, 0.14);
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(25, 68, 160, 0.08);
+    }
+    .yn-color-swatch { height: 84px; }
+    .yn-color-meta { padding: 0.85rem 0.95rem; }
+    .yn-color-hex {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #1944A0;
+      margin: 0;
+    }
+    .yn-color-usage {
+      font-size: 0.9rem;
+      color: #4b5f83;
+      margin: 0.35rem 0 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1024px) {
+      .yn-content { padding: 5rem clamp(1rem, 4vw, 1.5rem); }
+      .yn-sections > section { margin-bottom: 6rem; }
+    }
+    @media (max-width: 900px) {
+      .yn-phone-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 768px) {
+      .yn-content { padding: 4.5rem 1rem; }
+      .yn-sections > section { margin-bottom: 5rem; scroll-margin-top: 90px; }
+      .yn-heading.text-3xl { font-size: clamp(1.5rem, 6vw, 1.875rem) !important; }
+      .yn-heading.text-2xl { font-size: clamp(1.35rem, 5vw, 1.5rem) !important; }
+      .yn-prose { font-size: clamp(1rem, 3.8vw, 1.25rem) !important; }
+      .yn-highlight-list li { font-size: clamp(1rem, 3.8vw, 1.25rem) !important; }
+      .yn-system-grid { grid-template-columns: 1fr; }
+      .yn-color-palette { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #overview .md\:col-span-4 { position: static !important; }
+      .project-page .hero-title { white-space: normal; }
+    }
+    @media (max-width: 480px) {
+      .yn-content { padding: 4rem 0.85rem; }
+      .yn-phone-grid { grid-template-columns: 1fr; }
+      .yn-color-palette { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="project-page min-h-screen">
+  <div id="page-scroll-wrap">
+    <nav class="nav-main nav-main-subpage">
+      <div class="nav-main-left">
+        <a href="../../games.html" class="nav-link-main">Games</a>
+        <a href="../../uiux.html" class="nav-link-main">UI/UX</a>
+        <a href="../../digital-art.html" class="nav-link-main">Digital Art</a>
+      </div>
+      <div class="nav-main-center">
+        <a href="../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+      </div>
+      <div class="nav-main-right">
+        <a href="../../about.html" class="nav-link-main">About</a>
+      </div>
+    </nav>
+
+    <header class="relative h-screen overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img src="cover.jpg" alt="Yunnan Baiyao Oral Care homepage UI" class="w-full h-full object-cover object-top" />
+        <div class="absolute inset-0 bg-black/30"></div>
+      </div>
+      <div class="hero-inner relative z-10 text-white">
+        <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tight">
+          Yunnan Baiyao Oral Care
+        </h1>
+        <p class="hero-subtitle text-xl md:text-2xl font-light opacity-95 leading-relaxed">
+          An integrated oral-care commerce experience from brand storytelling to product conversion.
+        </p>
+      </div>
+    </header>
+
+    <div class="yn-main">
+      <div class="yn-content">
+        <div class="yn-body-wrap">
+          <aside class="yn-sidebar" aria-label="Page sections">
+            <div class="yn-sidebar-sticky">
+              <p class="yn-sidebar-title">Yunnan Baiyao</p>
+              <ul class="yn-toc" id="ynToc">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#background">Project Background</a></li>
+                <li><a href="#challenge">Design Challenge</a></li>
+                <li><a href="#strategy">Design Strategy</a></li>
+                <li><a href="#architecture">Information Architecture</a></li>
+                <li><a href="#commerce">Shopping Flow</a></li>
+                <li><a href="#content">Content Ecosystem</a></li>
+                <li><a href="#retention">Retention Loop</a></li>
+                <li><a href="#system">Design System</a></li>
+                <li><a href="#reflection">Reflection</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <div class="yn-sections">
+            <section id="overview" class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-10">
+              <div class="md:col-span-4 space-y-8 md:sticky md:top-32">
+                <div class="space-y-2">
+                  <h3 class="text-xs uppercase tracking-widest text-gray-400">Project Type</h3>
+                  <p class="text-xl font-medium">Mobile App UI/UX Design</p>
+                </div>
+                <div class="space-y-2">
+                  <h3 class="text-xs uppercase tracking-widest text-gray-400">Product Scope</h3>
+                  <p class="text-xl font-medium">Brand-led Oral Care Commerce Ecosystem</p>
+                </div>
+                <div class="space-y-2">
+                  <h3 class="text-xs uppercase tracking-widest text-gray-400">Role</h3>
+                  <p class="text-xl font-medium">UI/UX Designer</p>
+                </div>
+                <div class="space-y-2">
+                  <h3 class="text-xs uppercase tracking-widest text-gray-400">Focus Areas</h3>
+                  <p class="text-xl font-medium">Information Architecture, Visual System, Commerce Flow, Content Features, Loyalty Design</p>
+                </div>
+              </div>
+              <div class="md:col-span-8 space-y-6">
+                <div class="yn-accent-bar"></div>
+                <div class="prose yn-prose max-w-none">
+                  <p>This project builds a complete mobile experience around the <strong>Yunnan Baiyao oral care product line</strong>. Rather than acting as a simple storefront, the product connects brand news, oral-care education, health-check guidance, product discovery, cart flow, loyalty points, and account services in one operational platform.</p>
+                  <p>The core goal is to shorten the journey from brand awareness to product understanding, then to fast checkout and repeat purchase. A clear blue visual language communicates professionalism and trust, while modular blocks keep dense information easy to scan.</p>
+                </div>
+              </div>
+            </section>
+
+            <section id="background" class="space-y-6">
+              <p class="yn-section-label">Project Background</p>
+              <h2 class="yn-heading text-3xl md:text-4xl mt-2">From standalone product pages to a brand-content-commerce loop</h2>
+              <div class="yn-card p-7">
+                <p class="yn-prose">The oral-care portfolio includes toothpaste, toothbrushes, mouthwash, and related products. Users need more than quick checkout: they need support choosing the right item, learning daily care methods, joining campaigns, and using points to increase repurchase intent. Based on these needs, the project introduces a multi-entry homepage and layered feature architecture that balances brand expression with commerce efficiency.</p>
+              </div>
+            </section>
+
+            <section id="challenge" class="space-y-6">
+              <p class="yn-section-label">Design Challenge</p>
+              <h2 class="yn-heading text-3xl md:text-4xl mt-2 text-center">How might we keep navigation clear and conversion smooth in a high-density interface?</h2>
+            </section>
+
+            <section id="strategy" class="space-y-8">
+              <div>
+                <p class="yn-section-label">Design Strategy</p>
+                <h2 class="yn-heading text-3xl md:text-4xl mt-2">Four strategies shaped the end-to-end experience</h2>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="yn-card p-6">
+                  <h3 class="font-semibold text-lg mb-2">01 Layered Dual Homepage</h3>
+                  <p class="yn-prose">Homepage A focuses on launches and hero products, while Homepage B focuses on services and member benefits, reducing crowding per screen.</p>
+                </div>
+                <div class="yn-card p-6">
+                  <h3 class="font-semibold text-lg mb-2">02 Parallel Commerce and Content Flows</h3>
+                  <p class="yn-prose">Brand articles, oral-care classes, and health-check modules are embedded into the main flow so content directly supports decisions.</p>
+                </div>
+                <div class="yn-card p-6">
+                  <h3 class="font-semibold text-lg mb-2">03 Standardized Commerce Modules</h3>
+                  <p class="yn-prose">Listing, search, detail, and cart screens share one card and pricing structure to reduce cognitive switching costs.</p>
+                </div>
+                <div class="yn-card p-6">
+                  <h3 class="font-semibold text-lg mb-2">04 Loyalty-Driven Retention</h3>
+                  <p class="yn-prose">A points store and coupon mechanics extend user lifetime value and create a browse-buy-return loop.</p>
+                </div>
+              </div>
+            </section>
+
+            <section id="architecture" class="space-y-8">
+              <div>
+                <p class="yn-section-label">Information Architecture</p>
+                <h2 class="yn-heading text-3xl md:text-4xl mt-2">Homepage and catalog architecture for faster orientation</h2>
+                <p class="yn-prose mt-4">The dual-homepage system supports different user intents: page one emphasizes launches and promotions, while page two emphasizes brand services and loyalty entry points. The catalog combines vertical first-level navigation with a product grid to speed up browse-to-compare behavior.</p>
+              </div>
+              <div class="yn-phone-grid">
+                <figure class="yn-figure"><img src="首页.png" alt="Yunnan Baiyao Oral Care primary homepage"></figure>
+                <figure class="yn-figure"><img src="首页2.png" alt="Yunnan Baiyao Oral Care secondary homepage"></figure>
+                <figure class="yn-figure"><img src="产品列表.png" alt="Yunnan Baiyao Oral Care product listing page"></figure>
+              </div>
+            </section>
+
+            <section id="commerce" class="space-y-8">
+              <div>
+                <p class="yn-section-label">Shopping Flow</p>
+                <h2 class="yn-heading text-3xl md:text-4xl mt-2">A continuous conversion flow from search to checkout</h2>
+                <p class="yn-prose mt-4">Starting from keyword search, users can enter a relevant product stream and move into detail pages for variant confirmation, offer evaluation, and purchase action. Price, tags, guarantees, and cart or buy-now controls remain stable at key touchpoints.</p>
+              </div>
+              <ul class="yn-highlight-list">
+                <li><strong>Search:</strong> Supports both history and trending keywords to reduce input effort.</li>
+                <li><strong>Product Feed:</strong> A two-column stream improves side-by-side comparison for similar items.</li>
+                <li><strong>Detail:</strong> Key claims, promo pricing, and service guarantees reduce hesitation before purchase.</li>
+              </ul>
+              <div class="yn-phone-grid">
+                <figure class="yn-figure"><img src="产品搜索.png" alt="Yunnan Baiyao Oral Care search page"></figure>
+                <figure class="yn-figure"><img src="商品页.png" alt="Yunnan Baiyao Oral Care product feed"></figure>
+                <figure class="yn-figure"><img src="商品介绍.png" alt="Yunnan Baiyao Oral Care product detail page"></figure>
+              </div>
+            </section>
+
+            <section id="content" class="space-y-8">
+              <div>
+                <p class="yn-section-label">Content Ecosystem</p>
+                <h2 class="yn-heading text-3xl md:text-4xl mt-2">Brand content, oral-care education, and health guidance</h2>
+                <p class="yn-prose mt-4">These features do more than communicate promotions; they explain why users should buy. Brand news adds credibility, oral-care lessons provide practical guidance, and health-check content adds professional authority and clear action cues.</p>
+              </div>
+              <div class="yn-phone-grid">
+                <figure class="yn-figure"><img src="品牌资讯.png" alt="Yunnan Baiyao Oral Care brand news page"></figure>
+                <figure class="yn-figure"><img src="口腔课堂.png" alt="Yunnan Baiyao Oral Care education content page"></figure>
+                <figure class="yn-figure"><img src="口腔检测.png" alt="Yunnan Baiyao Oral Care oral health analysis page"></figure>
+              </div>
+            </section>
+
+            <section id="retention" class="space-y-8">
+              <div>
+                <p class="yn-section-label">Retention Loop</p>
+                <h2 class="yn-heading text-3xl md:text-4xl mt-2">Cart, account, and points store drive retention</h2>
+                <p class="yn-prose mt-4">The purchase-retention loop is built by three modules: the cart captures checkout intent, the account center consolidates orders and service entries, and the points store turns engagement into redeemable value through rewards and coupons.</p>
+              </div>
+              <div class="yn-phone-grid">
+                <figure class="yn-figure"><img src="购物袋.png" alt="Yunnan Baiyao Oral Care cart page"></figure>
+                <figure class="yn-figure"><img src="我的.png" alt="Yunnan Baiyao Oral Care account center"></figure>
+                <figure class="yn-figure"><img src="积分商城.png" alt="Yunnan Baiyao Oral Care points store"></figure>
+              </div>
+            </section>
+
+            <section id="system" class="space-y-10">
+              <div>
+                <p class="yn-section-label">Design System</p>
+                <h2 class="yn-heading text-3xl md:text-4xl mt-2">A blue visual system built around trust, clarity, and care</h2>
+              </div>
+              <div class="yn-card p-7 space-y-5">
+                <p class="yn-prose">The palette transitions from light sky blue to deep brand blue, creating visual hierarchy from ambient background surfaces to high-priority actions: <strong>#D9F0FE</strong> for large surfaces, <strong>#A2BFEB</strong> for supporting blocks, <strong>#639ADD</strong> for functional emphasis, and <strong>#1944A0</strong> for primary brand and CTA elements.</p>
+                <div class="yn-color-palette" aria-label="Color palette swatches">
+                  <div class="yn-color-chip">
+                    <div class="yn-color-swatch" style="background:#D9F0FE"></div>
+                    <div class="yn-color-meta">
+                      <p class="yn-color-hex">#D9F0FE</p>
+                      <p class="yn-color-usage">Background surfaces</p>
+                    </div>
+                  </div>
+                  <div class="yn-color-chip">
+                    <div class="yn-color-swatch" style="background:#A2BFEB"></div>
+                    <div class="yn-color-meta">
+                      <p class="yn-color-hex">#A2BFEB</p>
+                      <p class="yn-color-usage">Secondary blocks</p>
+                    </div>
+                  </div>
+                  <div class="yn-color-chip">
+                    <div class="yn-color-swatch" style="background:#639ADD"></div>
+                    <div class="yn-color-meta">
+                      <p class="yn-color-hex">#639ADD</p>
+                      <p class="yn-color-usage">Functional highlights</p>
+                    </div>
+                  </div>
+                  <div class="yn-color-chip">
+                    <div class="yn-color-swatch" style="background:#1944A0"></div>
+                    <div class="yn-color-meta">
+                      <p class="yn-color-hex">#1944A0</p>
+                      <p class="yn-color-usage">Brand primary / CTA</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="yn-system-grid">
+                  <figure class="yn-figure"><img src="Frame 79.png" alt="Yunnan Baiyao Oral Care icon style reference"></figure>
+                </div>
+              </div>
+            </section>
+
+            <section id="reflection" class="space-y-8">
+              <div>
+                <p class="yn-section-label">Reflection</p>
+                <h2 class="yn-heading text-3xl md:text-4xl mt-2">From page design to ecosystem design</h2>
+              </div>
+              <ul class="yn-highlight-list">
+                <li>The value of this project is not a single polished page, but a scalable framework for oral-care content and commerce.</li>
+                <li>Consistent card patterns and navigation logic help users build predictable behavior across pages.</li>
+                <li>Future iterations can add ranking logic, A/B test metrics, and finer loyalty segmentation.</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="border-t border-[#1944A0]/15 py-12 text-center text-[#5B5B5B] text-sm" style="background:#fff">
+      <p>&copy; 2026 Yehua Ou.</p>
+    </footer>
+  </div>
+
+  <script src="../js/toc.js"></script>
+  <script>
+    if (window.initProjectToc) window.initProjectToc('ynToc');
+  </script>
+</body>
+</html>
