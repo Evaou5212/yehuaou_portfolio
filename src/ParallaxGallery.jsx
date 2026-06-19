@@ -15,10 +15,11 @@ const projects = [
   { id: 15, title: 'GRWM', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/GRWM/index.html', image: '/GAMES/GRWM/scene1.JPG' },
   { id: 16, title: 'Irasutoya Cooking Game', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/Irasutoya-Cooking-Game/index.html', image: '/GAMES/Irasutoya-Cooking-Game/cover.png', hideFromHomepage: true },
   { id: 17, title: 'Dingdong Maicai', category: 'UI/UX', aspectRatio: 'landscape', href: '/UIUX/Dingdong%20redesign/index.html', image: '/UIUX/Dingdong%20redesign/cover.png' },
+  { id: 18, title: 'WakePlan', category: 'UI/UX', aspectRatio: 'landscape', href: '/UIUX/WakePlan/index.html', image: '/UIUX/WakePlan/cover.jpg' },
 ];
 
-// 第二首页展示顺序：UI/UX → Algorithmic Garden（提前至第 2）→ Games 前两个 → Digital Art 前四个
-const HOMEPAGE_ORDER = [17, 1, 2, 15, 3, 4, 5];
+// 第二首页展示顺序：UI/UX（Dingdong → WakePlan）→ Algorithmic Garden → Games 前两个 → Digital Art 前四个
+const HOMEPAGE_ORDER = [17, 18, 1, 2, 15, 3, 4, 5];
 
 const CELL_ASPECT_RATIO = 0.75;
 const SUBPAGE_CELL_ASPECT_RATIO = 0.6;

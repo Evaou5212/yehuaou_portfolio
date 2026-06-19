@@ -25,3 +25,10 @@ desktop.ini
 
 # Vite 本地覆盖
 *.local
+
+# 源视频与剪辑工程（案例页使用 Vimeo 嵌入，勿提交到 Git）
+*.mp4
+*.mov
+*.prproj
+**/Adobe Premiere Pro Auto-Save/
+**/drive-download-*/

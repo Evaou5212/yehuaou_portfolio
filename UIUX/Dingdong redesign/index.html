@@ -9,7 +9,7 @@
   <!-- Inter 仅用于 Design System 字体规范展示 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     #page-scroll-wrap {
       height: 100vh;
@@ -23,7 +23,7 @@
     @supports (scrollbar-width: thin) {
       #page-scroll-wrap { scrollbar-width: thin; scrollbar-color: rgba(48, 118, 30, 0.28) rgba(48, 118, 30, 0.06); }
     }
-    body.project-page { overflow-x: visible !important; background: #F7FFEA; }
+    body.project-page { overflow-x: visible !important; background: #fff; }
     .project-page { font-family: var(--font-body); color: #1a1a1a; }
     .project-page h1, .project-page h2, .project-page h3, .project-page h4 { font-family: var(--font-display); }
 
@@ -48,7 +48,7 @@
     }
 
     .dd-main {
-      background: #F7FFEA;
+      background: #fff;
       position: relative;
     }
     .dd-content {
@@ -69,7 +69,7 @@
       width: 100%;
       margin: 0 0 1.25rem;
       padding: 0.5rem 0 0.75rem;
-      background: #F7FFEA;
+      background: #fff;
       border-bottom: 1px solid rgba(48, 118, 30, 0.12);
     }
     .dd-sidebar-sticky { position: static; }
@@ -153,6 +153,7 @@
         position: absolute;
         left: -16.5rem;
         top: 0;
+        bottom: 0;
         width: 12rem;
         margin-left: 0;
         padding-right: 0;
@@ -233,7 +234,7 @@
     .dd-heading { color: #1a1a1a; font-weight: 600; line-height: 1.25; }
     .dd-prose { color: #5B5B5B; line-height: 1.7; font-size: 1.25rem; }
     .dd-card {
-      background: #fff;
+      background: #F7FFEA;
       border-radius: 1rem;
       border: 1px solid rgba(48, 118, 30, 0.12);
       box-shadow: 0 4px 20px rgba(48, 118, 30, 0.05);
@@ -250,14 +251,14 @@
     .dd-principle {
       padding: 1rem 1.15rem;
       border-left: 3px solid #0E932E;
-      background: rgba(255,255,255,0.65);
+      background: #F7FFEA;
       border-radius: 0 0.6rem 0.6rem 0;
     }
     .dd-principle h3 { font-weight: 600; font-size: 1.3rem; color: #30761E; margin: 0 0 0.35rem; }
     .dd-principle p { font-size: 1.25rem; color: #5B5B5B; margin: 0; line-height: 1.7; }
 
     .dd-journey-table-wrap {
-      background: #fff;
+      background: #F7FFEA;
       border-radius: 1rem;
       border: 1px solid rgba(48, 118, 30, 0.12);
       box-shadow: 0 4px 20px rgba(48, 118, 30, 0.05);
@@ -306,9 +307,47 @@
     .dd-decision { margin-bottom: 4rem; }
     .dd-decision:last-child { margin-bottom: 0; }
 
-    .dd-color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.65rem; }
-    .dd-color-swatch { width: 100%; aspect-ratio: 1; border-radius: 0.6rem; border: 1px solid rgba(0,0,0,0.06); }
-    .dd-color-label { font-size: 0.7rem; color: #5B5B5B; margin-top: 0.25rem; font-family: var(--font-body); }
+    .dd-type-spec {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .dd-type-spec-col {
+      padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 3vw, 2.25rem);
+    }
+    .dd-type-spec-col--cn {
+      background: #fff;
+      color: #1a1a1a;
+      font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+    }
+    .dd-type-spec-col--en {
+      background: #F7FFEA;
+      color: #1a1a1a;
+      font-family: 'Inter', sans-serif;
+    }
+    .dd-type-spec-label {
+      font-size: 0.8rem;
+      color: #5B5B5B;
+      margin: 0 0 0.5rem;
+    }
+    .dd-type-spec-label strong { font-weight: 600; color: #1a1a1a; }
+    .dd-type-spec-font-name {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #5B5B5B;
+      margin: 0 0 2.25rem;
+    }
+    .dd-type-row + .dd-type-row { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+    .dd-type-sample { margin: 0; }
+    .dd-type-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.02em;
+      color: #5B5B5B;
+      margin: 0.4rem 0 0;
+    }
     .dd-style-chip {
       display: inline-block;
       font-size: 1.05rem;
@@ -368,14 +407,13 @@
       .dd-principle h3 { font-size: clamp(1.1rem, 4vw, 1.3rem); }
       .dd-principle p { font-size: clamp(1rem, 3.8vw, 1.25rem) !important; }
       .dd-journey-table { min-width: 560px; font-size: 0.82rem; }
-      .dd-color-grid { grid-template-columns: repeat(3, 1fr); }
+      .dd-type-spec { grid-template-columns: 1fr; }
       #overview .md\:col-span-4 { position: static !important; }
     }
 
     @media (max-width: 480px) {
       .dd-content { padding: 4rem 0.85rem; }
       .dd-style-chip { font-size: 0.9rem; padding: 0.4rem 0.9rem; }
-      .dd-color-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -682,35 +720,75 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="space-y-4">
-              <h3 class="font-semibold text-lg">Fonts</h3>
-              <div>
-                <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">Chinese · Microsoft YaHei</p>
-                <p style="font-size:1.5rem;font-weight:600;font-family:'Microsoft YaHei','微软雅黑',sans-serif">微软雅黑 · 新鲜送达</p>
+          <div class="space-y-4">
+            <h3 class="font-semibold text-lg">Fonts</h3>
+            <p class="dd-prose">Chinese copy uses Microsoft YaHei for readability at small sizes. English copy uses Inter, a free commercial typeface that is slender and upright, steady yet fashionable.</p>
+            <div class="dd-type-spec">
+              <div class="dd-type-spec-col dd-type-spec-col--cn">
+                <p class="dd-type-spec-label">Typography → <strong>中文</strong></p>
+                <p class="dd-type-spec-font-name">Microsoft YaHei · 微软雅黑</p>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:32px;line-height:36px;font-weight:700">新鲜送达</p>
+                  <p class="dd-type-meta">标题 / 大 · 32/36 700 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:22px;line-height:26px;font-weight:700">今日特价</p>
+                  <p class="dd-type-meta">标题 / 中 · 22/26 700 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:16px;line-height:20px;font-weight:700">生鲜蔬菜</p>
+                  <p class="dd-type-meta">标题 / 小 · 16/20 700 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:18px;line-height:24px;font-weight:400">30分钟急速送达</p>
+                  <p class="dd-type-meta">正文 / 大 · 18/24 400 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:14px;line-height:20px;font-weight:400">叮咚买菜，品质的主义</p>
+                  <p class="dd-type-meta">正文 / 中 · 14/20 400 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:12px;line-height:16px;font-weight:400">已售 1.2万</p>
+                  <p class="dd-type-meta">正文 / 小 · 12/16 400 0% 100 100%</p>
+                </div>
               </div>
-              <div>
-                <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">English · Inter</p>
-                <p style="font-size:1.5rem;font-weight:600;font-family:'Inter',sans-serif">Inter · Fresh Delivery</p>
+              <div class="dd-type-spec-col dd-type-spec-col--en">
+                <p class="dd-type-spec-label">Typography → <strong>English</strong></p>
+                <p class="dd-type-spec-font-name">Inter</p>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:36px;line-height:38px;font-weight:700">Fresh Delivery</p>
+                  <p class="dd-type-meta">Title / Large · 36/38 700 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:24px;line-height:28px;font-weight:700">Daily Deals</p>
+                  <p class="dd-type-meta">Title / Medium · 24/28 700 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:16px;line-height:20px;font-weight:600">Produce</p>
+                  <p class="dd-type-meta">Title / Small · 16/20 600 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:20px;line-height:24px;font-weight:600">Delivered in 30 minutes</p>
+                  <p class="dd-type-meta">Body / Large · 20/24 600 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:15px;line-height:20px;font-weight:400">Dingdong Maicai — quality first</p>
+                  <p class="dd-type-meta">Body / Medium · 15/20 400 0% 100 100%</p>
+                </div>
+                <div class="dd-type-row">
+                  <p class="dd-type-sample" style="font-size:12px;line-height:16px;font-weight:400">12K sold</p>
+                  <p class="dd-type-meta">Body / Small · 12/16 400 0% 100 100%</p>
+                </div>
               </div>
-              <p class="dd-prose">Chinese copy uses Microsoft YaHei for readability at small sizes. English copy uses Inter, a free commercial typeface that is slender and upright, steady yet fashionable.</p>
             </div>
-            <div class="space-y-4">
-              <h3 class="font-semibold text-lg">Colors</h3>
-              <p class="dd-prose">The standard palette leads with fresh greens to express the brand tone.</p>
-              <div class="dd-color-grid">
-                <div><div class="dd-color-swatch" style="background:#30761E"></div><p class="dd-color-label">#30761E</p></div>
-                <div><div class="dd-color-swatch" style="background:#0E932E"></div><p class="dd-color-label">#0E932E</p></div>
-                <div><div class="dd-color-swatch" style="background:#F7FFEA"></div><p class="dd-color-label">#F7FFEA</p></div>
-                <div><div class="dd-color-swatch" style="background:#FFA620"></div><p class="dd-color-label">#FFA620</p></div>
-                <div><div class="dd-color-swatch" style="background:#FFD493"></div><p class="dd-color-label">#FFD493</p></div>
-                <div><div class="dd-color-swatch" style="background:#FF0000"></div><p class="dd-color-label">#FF0000</p></div>
-                <div><div class="dd-color-swatch" style="background:#954C17"></div><p class="dd-color-label">#954C17</p></div>
-                <div><div class="dd-color-swatch" style="background:#000000"></div><p class="dd-color-label">#000000</p></div>
-                <div><div class="dd-color-swatch" style="background:#5B5B5B"></div><p class="dd-color-label">#5B5B5B</p></div>
-                <div><div class="dd-color-swatch" style="background:#FFFFFF"></div><p class="dd-color-label">#FFFFFF</p></div>
-              </div>
-            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="font-semibold text-lg">Colors</h3>
+            <p class="dd-prose">The standard palette leads with fresh greens to express the brand tone.</p>
+            <figure class="dd-figure">
+              <img src="Colors.png" alt="Dingdong Maicai color palette specification" width="1200" height="auto" loading="lazy" />
+            </figure>
           </div>
         </section>
 
@@ -744,33 +822,14 @@
     </div>
   </div>
 
-  <footer class="border-t border-[#30761E]/15 py-12 text-center text-[#5B5B5B] text-sm" style="background:#F7FFEA">
+  <footer class="border-t border-[#30761E]/15 py-12 text-center text-[#5B5B5B] text-sm" style="background:#fff">
     <p>&copy; 2026 Yehua Ou.</p>
   </footer>
   </div>
 
+  <script src="../js/toc.js"></script>
   <script>
-    (function () {
-      var links = document.querySelectorAll('#ddToc a');
-      var sections = [];
-      links.forEach(function (a) {
-        var id = a.getAttribute('href').slice(1);
-        var el = document.getElementById(id);
-        if (el) sections.push({ link: a, el: el });
-      });
-      var wrap = document.getElementById('page-scroll-wrap');
-      function onScroll() {
-        var anchor = 150;
-        var current = sections[0];
-        sections.forEach(function (s) {
-          if (s.el.getBoundingClientRect().top <= anchor) current = s;
-        });
-        links.forEach(function (a) { a.classList.remove('is-active'); });
-        if (current) current.link.classList.add('is-active');
-      }
-      (wrap || window).addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
+    if (window.initProjectToc) window.initProjectToc('ddToc');
   </script>
 </body>
 </html>

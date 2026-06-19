@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WakePlan — Portfolio Case Study | Yehua Ou</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="project-page min-h-screen">
+  <div id="page-scroll-wrap">
+  <nav class="nav-main nav-main-subpage">
+    <div class="nav-main-left">
+      <a href="../../games.html" class="nav-link-main">Games</a>
+      <a href="../../uiux.html" class="nav-link-main">UI/UX</a>
+      <a href="../../digital-art.html" class="nav-link-main">Digital Art</a>
+    </div>
+    <div class="nav-main-center">
+      <a href="../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+    </div>
+    <div class="nav-main-right">
+      <a href="../../about.html" class="nav-link-main">About</a>
+    </div>
+  </nav>
+
+  <header class="relative h-screen overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="cover.jpg" alt="WakePlan app cover" class="w-full h-full object-cover object-center" />
+      <div class="absolute inset-0 bg-black/35"></div>
+    </div>
+    <div class="hero-inner relative z-10 text-white">
+      <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-tight">
+        WakePlan
+      </h1>
+      <p class="hero-subtitle text-xl md:text-2xl font-light opacity-90 leading-relaxed">
+        A behavior-driven alarm system that helps users wake up intentionally instead of unconsciously dismissing alarms.
+      </p>
+    </div>
+  </header>
+
+  <div class="wp-main">
+    <div class="wp-content">
+      <div class="wp-body-wrap">
+        <aside class="wp-sidebar" aria-label="Page sections">
+          <div class="wp-sidebar-sticky">
+            <p class="wp-sidebar-title">WakePlan</p>
+            <ul class="wp-toc" id="wpToc">
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#problem-statement">Problem Statement</a></li>
+              <li><a href="#challenge">Challenge</a></li>
+              <li><a href="#the-solution">The Solution</a></li>
+              <li><a href="#key-insight">Key Insight</a></li>
+              <li><a href="#design-goals">Design Goals</a></li>
+              <li><a href="#solution">Solution</a></li>
+              <li><a href="#key-feature-01">Key Feature 01</a></li>
+              <li><a href="#key-feature-02">Key Feature 02</a></li>
+              <li><a href="#key-feature-03">Key Feature 03</a></li>
+              <li><a href="#key-feature-04">Key Feature 04</a></li>
+              <li><a href="#comparison">Comparison</a></li>
+              <li><a href="#user-flow">User Flow</a></li>
+              <li><a href="#design-philosophy">Design Philosophy</a></li>
+              <li><a href="#ai-development">AI-Assisted Development</a></li>
+              <li><a href="#reflection">Reflection</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="wp-sections" id="wpSections">
+          <p class="wp-prose" style="padding:2rem 0;color:#9ca3af">Loading sections…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-[#2D4A6F]/15 py-12 text-center text-[#5B5B5B] text-sm" style="background:#fff">
+    <p>&copy; 2026 Yehua Ou.</p>
+  </footer>
+  </div>
+
+  <script src="../js/toc.js"></script>
+  <script src="js/load-sections.js"></script>
+  <script>
+    document.addEventListener('wp-sections-loaded', function () {
+      if (window.initProjectToc) window.initProjectToc('wpToc');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#2D4A6F"/>
+  <rect width="1200" height="675" fill="url(#grad)" opacity="0.85"/>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2D4A6F"/>
+      <stop offset="1" stop-color="#D4956A"/>
+    </linearGradient>
+  </defs>
+  <text x="600" y="320" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="48" font-weight="600">WakePlan</text>
+  <text x="600" y="370" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="system-ui,sans-serif" font-size="14" letter-spacing="3">COVER PLACEHOLDER</text>
+</svg>
