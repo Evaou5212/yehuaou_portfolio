@@ -5,17 +5,17 @@ import React, { useRef } from 'react';
 import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
 
 const projects = [
-  { id: 1, title: 'The Algorithmic Garden', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/The-Algorithmic-Garden/index.html', image: '/DIGITAL_ART/The-Algorithmic-Garden/cover.png' },
-  { id: 2, title: 'Trust Reconstruction', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/marine%20game/Loggerhead/index.html', image: '/GAMES/marine%20game/Cover.png' },
-  { id: 3, title: 'Lorde — Visual Re-creation', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/lorde/index.html', image: '/DIGITAL_ART/TD_practices/lorde/lorde1.gif' },
-  { id: 4, title: 'Experimental Camera', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/experimental_camera/index.html', image: '/DIGITAL_ART/TD_practices/experimental_camera/cover.gif' },
-  { id: 5, title: 'VJ Controller', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/hikaru_utada/index.html', image: '/DIGITAL_ART/TD_practices/hikaru_utada/cover.gif' },
-  { id: 6, title: 'Creative Coding', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/creative_coding/index.html', image: '/DIGITAL_ART/creative_coding/cover.png' },
-  { id: 7, title: 'The Gaokao Factory', category: 'Digital Art', aspectRatio: 'landscape', href: '/DIGITAL_ART/Gaokao/index.html', image: '/DIGITAL_ART/Gaokao/cover.png' },
-  { id: 15, title: 'GRWM', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/GRWM/index.html', image: '/GAMES/GRWM/scene1.JPG' },
-  { id: 16, title: 'Irasutoya Cooking Game', category: 'Games', aspectRatio: 'landscape', href: '/GAMES/Irasutoya-Cooking-Game/index.html', image: '/GAMES/Irasutoya-Cooking-Game/cover.png', hideFromHomepage: true },
-  { id: 17, title: 'Dingdong Maicai', category: 'UI/UX', aspectRatio: 'landscape', href: '/UIUX/Dingdong%20redesign/index.html', image: '/UIUX/Dingdong%20redesign/cover.png' },
-  { id: 18, title: 'WakePlan', category: 'UI/UX', aspectRatio: 'landscape', href: '/UIUX/WakePlan/index.html', image: '/UIUX/WakePlan/cover.jpg' },
+  { id: 1, title: 'The Algorithmic Garden', category: 'Digital Art', description: 'Speculative 3D Animation', aspectRatio: 'landscape', href: '/DIGITAL_ART/The-Algorithmic-Garden/index.html', image: '/DIGITAL_ART/The-Algorithmic-Garden/cover.png' },
+  { id: 2, title: 'Trust Reconstruction', category: 'Games', description: 'Two-Player VR Narrative Game', aspectRatio: 'landscape', href: '/GAMES/marine%20game/Loggerhead/index.html', image: '/GAMES/marine%20game/Cover.png' },
+  { id: 3, title: 'Lorde — Visual Re-creation', category: 'Digital Art', description: 'TouchDesigner Visual Re-creation', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/lorde/index.html', image: '/DIGITAL_ART/TD_practices/lorde/lorde1.gif' },
+  { id: 4, title: 'Experimental Camera', category: 'Digital Art', description: 'TouchDesigner + MediaPipe Interaction', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/experimental_camera/index.html', image: '/DIGITAL_ART/TD_practices/experimental_camera/cover.gif' },
+  { id: 5, title: 'VJ Controller', category: 'Digital Art', description: 'Audio-Reactive VJ Controller', aspectRatio: 'landscape', href: '/DIGITAL_ART/TD_practices/hikaru_utada/index.html', image: '/DIGITAL_ART/TD_practices/hikaru_utada/cover.gif' },
+  { id: 6, title: 'Creative Coding', category: 'Digital Art', description: 'Interactive p5.js Sketch Collection', aspectRatio: 'landscape', href: '/DIGITAL_ART/creative_coding/index.html', image: '/DIGITAL_ART/creative_coding/cover.png' },
+  { id: 7, title: 'The Gaokao Factory', category: 'Digital Art', description: 'AIGC Video Series', aspectRatio: 'landscape', href: '/DIGITAL_ART/Gaokao/index.html', image: '/DIGITAL_ART/Gaokao/cover.png' },
+  { id: 15, title: 'GRWM', category: 'Games', description: 'Narrative p5.js Browser Game', aspectRatio: 'landscape', href: '/GAMES/GRWM/index.html', image: '/GAMES/GRWM/scene1.JPG' },
+  { id: 16, title: 'Irasutoya Cooking Game', category: 'Games', description: 'Irasutoya-Style Browser Game', aspectRatio: 'landscape', href: '/GAMES/Irasutoya-Cooking-Game/index.html', image: '/GAMES/Irasutoya-Cooking-Game/cover.png', hideFromHomepage: true },
+  { id: 17, title: 'Dingdong Maicai', category: 'UI/UX', description: 'Mobile Grocery App UX Redesign', aspectRatio: 'landscape', href: '/UIUX/Dingdong%20redesign/index.html', image: '/UIUX/Dingdong%20redesign/cover.png' },
+  { id: 18, title: 'WakePlan', category: 'UI/UX', description: 'AI-First Wake-Up Product Design', aspectRatio: 'landscape', href: '/UIUX/WakePlan/index.html', image: '/UIUX/WakePlan/cover.jpg' },
 ];
 
 // 第二首页展示顺序：UI/UX（Dingdong → WakePlan）→ Algorithmic Garden → Games 前两个 → Digital Art 前四个
@@ -185,7 +185,7 @@ function ZigZagItem({ project, index, currentStep, columns, totalItems, cellAspe
           {project.title}
         </h3>
         <p className="gallery-card-category" style={{ fontWeight: 400, color: 'rgba(0,0,0,0.5)', lineHeight: 1.4, margin: 0 }}>
-          {project.category} — Digital Frontier
+          {project.description || project.category}
         </p>
       </motion.div>
       </a>

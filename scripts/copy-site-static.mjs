@@ -45,4 +45,11 @@ if (fs.existsSync(stylesFrom)) {
   console.log('copy-site-static: styles.css -> dist/styles.css')
 }
 
+const iconFrom = resolve(root, 'icon.png')
+const iconTo = resolve(outDir, 'icon.png')
+if (fs.existsSync(iconFrom)) {
+  fs.copyFileSync(iconFrom, iconTo)
+  console.log('copy-site-static: icon.png -> dist/icon.png')
+}
+
 console.log('copy-site-static: 完成')
