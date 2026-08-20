@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inspiration Radar — Portfolio Case Study | Yehua Ou</title>
+  <link rel="icon" type="image/png" href="/icon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="project-page min-h-screen">
+  <div id="page-scroll-wrap">
+  <nav class="nav-main nav-main-subpage">
+    <div class="nav-main-left">
+      <a href="../../games.html" class="nav-link-main">Games</a>
+      <a href="../../uiux.html" class="nav-link-main">UI/UX</a>
+      <a href="../../digital-art.html" class="nav-link-main">Digital Art</a>
+    </div>
+    <div class="nav-main-center">
+      <a href="../../index.html#main" class="nav-main-name-link">Yehua Ou</a>
+    </div>
+    <div class="nav-main-right">
+      <a href="../../about.html" class="nav-link-main">About</a>
+    </div>
+  </nav>
+
+  <header class="relative h-screen overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="cover.png" alt="Inspiration Radar archive interface" class="w-full h-full object-cover object-top" />
+      <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+    <div class="hero-inner relative z-10 text-white">
+      <h1 class="hero-title tracking-tight">
+        Inspiration Radar
+      </h1>
+      <p class="hero-subtitle text-xl md:text-2xl font-light opacity-90 leading-relaxed">
+        A continuously updated discovery archive that surfaces inspiring GitHub projects for designers, creative coders, and vibe coders.
+      </p>
+    </div>
+  </header>
+
+  <div class="wp-main">
+    <div class="wp-content">
+      <div class="wp-body-wrap">
+        <aside class="wp-sidebar" aria-label="Page sections">
+          <div class="wp-sidebar-sticky">
+            <p class="wp-sidebar-title">Inspiration Radar</p>
+            <ul class="wp-toc" id="wpToc">
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#problem-statement">The Problem</a></li>
+              <li><a href="#pivot">Initial Idea &amp; Pivot</a></li>
+              <li><a href="#criteria">Worth Discovering</a></li>
+              <li><a href="#system">How the System Works</a></li>
+              <li><a href="#experience">Discovery Experience</a></li>
+              <li><a href="#key-features">Key Features</a></li>
+              <li><a href="#reflection">Reflection</a></li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="wp-sections" id="wpSections">
+          <p class="wp-prose" style="padding:2rem 0;color:#9ca3af">Loading sections…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-[#1F1F1A]/15 py-12 text-center text-[#5B5B5B] text-sm" style="background:#fff">
+    <p>&copy; 2026 Yehua Ou.</p>
+  </footer>
+  </div>
+
+  <script src="../js/toc.js"></script>
+  <script src="js/load-sections.js"></script>
+  <script>
+    document.addEventListener('wp-sections-loaded', function () {
+      if (window.initProjectToc) window.initProjectToc('wpToc');
+    });
+  </script>
+</body>
+</html>
